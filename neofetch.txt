@@ -1,0 +1,8 @@
+neofetch
+a
+<<<<<<< HEAD
+
+=======
+b
+c
+>>>>>>> d2b0baffaa210a181af7ed72322097b70bd3e1f5

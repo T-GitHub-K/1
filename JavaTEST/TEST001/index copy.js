@@ -1,0 +1,2 @@
+//コメント
+console.log('Hello');

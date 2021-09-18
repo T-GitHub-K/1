@@ -1,0 +1,3 @@
+sudo curl -o /usr/share/applications/wine.desktop https://raw.githubusercontent.com/wine-mirror/wine/5c2d6211f6590d3856dc9188593b3d3597c8b441/loader/wine.desktop
+#現在のユーザのみで選択で
+
