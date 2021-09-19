@@ -13,3 +13,10 @@ git branch -M main
 git push -u origin main
 
 https://github.com/T-GitHub-K/1.git
+
+git add .
+git commit -m "コメント"
+git push origin
+
+git pull origin main
+
