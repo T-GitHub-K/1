@@ -1,5 +1,4 @@
-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
-
+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
 
 echo "# 1" >> README.md
 git init
@@ -20,4 +19,3 @@ git commit -m "コメント"
 git push origin
 
 git pull origin main
-
