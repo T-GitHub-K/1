@@ -19,3 +19,4 @@ git commit -m "コメント"
 git push origin
 
 git pull origin main
+
