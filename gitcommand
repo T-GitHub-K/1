@@ -1,5 +1,3 @@
-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
-
 echo "# 1" >> README.md
 git init
 git add README.md
@@ -11,8 +9,6 @@ git push -u origin main
 git remote add origin https://github.com/T-GitHub-K/1.git
 git branch -M main
 git push -u origin main
-
-https://github.com/T-GitHub-K/1.git
 
 SSH
 ls ~/.ssh
@@ -33,7 +29,6 @@ Are you sure you want to continue connecting (yes/no)?
 
 Hi username! You've successfully authenticated, but GitHub does not
 provide shell access.
-
 
 
 git add .
