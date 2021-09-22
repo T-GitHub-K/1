@@ -14,6 +14,16 @@ git push -u origin main
 
 https://github.com/T-GitHub-K/1.git
 
+SSH
+ls ~/.ssh
+
+ssh-keygen -t rsa -C "pmailwork-005@yahoo.co.jp"
+
+git config remote.origin.url
+
+git remote set-url origin git@github.com:T-GitHub-K/1.git
+
+
 git add .
 git commit -m "コメント"
 git push origin
