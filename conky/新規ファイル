@@ -1,0 +1,7 @@
+IP (wlan1):$alignr${addr wlan1}
+${color2} Up: ${color2}${upspeed wlan1} k/s
+${color1}${alignr}${upspeedgraph wlan1 10,170 000000}
+${color2} Down: ${color2}${downspeed wlan1}k/s${color}
+${color1}${alignr}${downspeedgraph wlan1 10,170 000000}
+${color2}TDown:${totaldown wlan1}${alignr}TUp:${totalup wlan1}${endif}${if_up ath0}
+IP (ath0):$alignr${addr ath0}
