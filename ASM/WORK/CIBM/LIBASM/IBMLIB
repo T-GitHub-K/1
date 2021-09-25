@@ -1,0 +1,22 @@
+BEEP..............beep              CTOH..............CTOH
+HTOC..............HTOC              PALETTE...........PALETTE
+PARA..............PARA              WAIT1.............WAIT1
+
+
+PARA              Offset: 00000010H  Code and data size: 4fH
+  PARA            
+
+PALETTE           Offset: 000000b0H  Code and data size: 19bH
+  PALETTE         
+
+CTOH              Offset: 00000430H  Code and data size: 55H
+  CTOH            
+
+HTOC              Offset: 00000510H  Code and data size: 30H
+  HTOC            
+
+beep              Offset: 000005a0H  Code and data size: 3fH
+  BEEP            
+
+WAIT1             Offset: 00000670H  Code and data size: eH
+  WAIT1           

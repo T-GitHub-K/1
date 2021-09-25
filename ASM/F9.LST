@@ -1,0 +1,354 @@
+ Microsoft MACRO Assembler  Version 3.00               	Page	1-1
+	 	 	 	 	 	 	 	01-10-96    
+
+
+ 	 	 	 	;**********************************************
+	 	 	 	******************
+ 	 	 	 	;	F9.COM    	 	 	
+ 	 	 	 	 	 	 	*
+ 	 	 	 	;	 	 	 	 	
+ 	 	 	 	 	 	 	*
+ 	 	 	 	;	ÉLÅ[ïœçXèàóù	 	 	
+ 	 	 	 	 	 	 	*
+ 	 	 	 	;**********************************************
+	 	 	 	******************
+ 	 	 	 	
+                             C	INCLUDE	STD.H
+                             C	ENDIF
+                             C	;----------------------------------------------
+	 	 	 	------------------
+                             C	;	286 ÕØ¿ﬁ∞	 	 	
+ 	 	 	 	 	 	 	
+                             C	;	 	 	 	 	
+ 	 	 	 	 	 	 	
+                             C	;	CPU 286ÇÃägí£ñΩóﬂÉZÉbÉg	 	
+ 	 	 	 	 	 	 	
+                             C	;----------------------------------------------
+	 	 	 	------------------
+                             C	
+                             C	.286c
+                             C	
+ = 0000                      C	NUL	EQU	0H
+ = 0003                      C	BREAK	EQU	03H
+ = 0008                      C	BS	EQU	08H
+ = 000A                      C	LF	EQU	0AH
+ = 000D                      C	CR	EQU	0DH
+ = 001A                      C	CLS	EQU	1AH
+ = 001B                      C	ESC	EQU	1BH
+ = 001E                      C	HOME	EQU	1EH
+ = 0020                      C	SPC	EQU	20H
+ = 007F                      C	DEL	EQU	7FH
+ =-0001                      C	EOF	EQU	-1
+ = 0012                      C	INS	EQU	12H
+ = 0009                      C	TAB	EQU	09H
+                             C	;----------------------------------------------
+	 	 	 	-------------------------------
+                             C	EXTRN	BEEP:NEAR	 	;âπÇ»ÇÁÇ∑
+                             C	EXTRN	CTOH:NEAR	 	;∑¨◊∏¿∞ÇHEXÇ…ï
+	 	 	 	œä∑
+                             C	EXTRN	HTOC:NEAR	 	;HEXÇ∑¨◊∏¿∞Ç…ï
+	 	 	 	œä∑
+                             C	EXTRN	PALETTE:NEAR	;éwíË ﬂ⁄ØƒÇâÊñ Ç…ï\é¶
+                             C	EXTRN	PARA:NEAR	 	;DTAÇÃï∂éöóÒéÊì
+	 	 	 	æ
+                             C	EXTRN	WAIT1:NEAR	 	;≥¥≤ƒ
+                             C	;----------------------------------------------
+	 	 	 	-------------------------------
+                             C	;
+                             C	;
+ Microsoft MACRO Assembler  Version 3.00               	Page	1-2
+	 	 	 	 	 	 	 	01-10-96    
+
+
+                             C	;	ÇlÇ`ÇbÇqÇn
+                             C	;
+                             C	;
+                             C	
+                             C	;--ÉZÉOÉÅÉìÉg----------------------------------
+	 	 	 	---------------------
+                             C	
+                             C	PSEG	MACRO
+                             C	 	_TEXT	SEGMENT	WORD PUBLIC 'CODE'
+                             C	ENDM
+                             C	
+                             C	DSEG	MACRO
+                             C	 	_DATA	SEGMENT	WORD PUBLIC 'DATA'
+                             C	ENDM
+                             C	
+                             C	;--COMå`éÆÇÃÉZÉOÉÅÉìÉg-------------------------
+	 	 	 	----------------------
+                             C	
+                             C	COMSEG	MACRO
+                             C	
+                             C	 	_TEXT	SEGMENT	WORD PUBLIC 'CODE'
+                             C	 	 	 	ASSUME	CS:_TEXT,DS:_TE
+	 	 	 	XT,ES:_TEXT,SS:_TEXT
+                             C	
+                             C	 	 	 	ORG	80H
+                             C	 	 	 	DTA	DB	80H 
+	 	 	 	 	DUP(0)
+                             C	 	 	 	ORG	100H
+                             C	ENDM
+                             C	
+                             C	;--ÉZÉOÉÅÉìÉgÇÃèIÇÌÇË--------------------------
+	 	 	 	----------------------
+                             C	SEGEND	MACRO
+                             C	 	 	 	_TEXT	ENDS
+                             C	ENDM
+                             C	
+                             C	;--ÉvÉçÉZÉXèIóπ--------------------------------
+	 	 	 	----------------------
+                             C	EXIT	MACRO	REG
+                             C	 	 	 	
+                             C	 	IFNB	<REG>
+                             C	 	 	 	MOV	AL,REG
+                             C	 	ELSE
+                             C	 	 	 	XOR AL,AL
+                             C	 	ENDIF
+                             C	 	 	 	MOV	AH,4CH
+                             C	 	 	 	INT	21H
+                             C	ENDM
+                             C	;--ÉXÉ^ÉbÉN------------------------------------
+	 	 	 	----------------------
+                             C	STACK	MACRO	SIZE
+                             C	 	 	 	
+                             C	 	IFNB	<SIZE>
+                             C	 	 	 	STACK_D	 	DB
+ Microsoft MACRO Assembler  Version 3.00               	Page	1-3
+	 	 	 	 	 	 	 	01-10-96    
+
+
+	 	 	 	 	SIZE	DUP(0)
+                             C	 	ELSE
+                             C	 	 	 	STACK_D	 	DB
+	 	 	 	 	128	 	DUP(0)
+                             C	 	ENDIF
+                             C	ENDM
+                             C	
+                             C	ENDIF
+ 	 	 	 	
+ = 0015	 	 	 	INT_NO	EQU	15H
+ 	 	 	 	
+ 	 	 	 	 	COMSEG
+ 0000                         +	 	_TEXT	SEGMENT	WORD PUBLIC 'CODE'
+ 0080                         +	 	 	 	ORG	80H
+ 0080     80 [                +	 	 	 	DTA	DB	80H 
+	 	 	 	 	DUP(0)
+ 0100                         +	 	 	 	ORG	100H
+ 	 	 	 	
+ 0100  EB 32 90	 	 	@S:	JMP	SET
+ 	 	 	 	
+ 0103  0000	 	 	OLD_OFF	DW	0
+ 0105  0000	 	 	OLD_SEG	DW	0
+ 0107  46 39	 	 	SIN	DB	"F9"
+ 	 	 	 	
+ 0109	 	 	 	ENT:
+ 0109  9C	 	 	 	PUSHF
+ 010A  80 FC 4F	 	 	 	CMP	AH,4FH
+ 010D  75 1D	 	 	 	JNZ	END_1
+ 010F  3C 37	 	 	 	CMP	AL,37H
+ 0111  74 03	 	 	 	JZ	J1
+ 0113  A2 0132 R	 	 	MOV	STK_AL,AL
+ 0116	 	 	 	J1:	
+ 0116  3C 37	 	 	 	CMP	AL,37H
+ 0118  75 12	 	 	 	JNZ	END_1
+ 011A  80 3E 0132 R E0	 	 	CMP	STK_AL,0E0H
+ 011F  74 0B	 	 	 	JZ	END_1
+ 0121  B0 43	 	 	 	MOV	AL,43H
+ 0123  9D	 	 	 	POPF
+ 0124  F9	 	 	 	STC
+ 0125  2E: FF 2E 0103 R	 	 	JMP	DWORD PTR CS:OLD_OFF
+ 	 	 	 	 	EVEN
+ 	 	 	 	END_1:	
+ E r r o r   ---	6:Phase error between passes    
+ 012C  9D	 	 	 	POPF
+ 012D  2E: FF 2E 0103 R	 	 	JMP	DWORD PTR CS:OLD_OFF
+ 	 	 	 	
+ 0132  00	 	 	STK_AL	DB	0
+ 	 	 	 	
+ 0133  90	 	 	 	EVEN
+ = 0134	 	 	 	SIZE1	EQU	$
+ 	 	 	 	
+ 	 	 	 	
+ 0134	 	 	 	SET:
+ 0134  B4 35	 	 	 	MOV	AH,35H
+ Microsoft MACRO Assembler  Version 3.00               	Page	1-4
+	 	 	 	 	 	 	 	01-10-96    
+
+
+ 0136  B0 15	 	 	 	MOV	AL,INT_NO
+ 0138  CD 21	 	 	 	INT	21H
+ 013A  89 1E 0103 R	 	 	MOV	OLD_OFF,BX
+ 013E  8C 06 0105 R	 	 	MOV	OLD_SEG,ES
+ 	 	 	 	
+ 0142  83 EB 02	 	 	 	SUB	BX,2
+ 0145  8B FB	 	 	 	MOV	DI,BX
+ 0147  BE 01AD R	 	 	MOV	SI,OFFSET CHK
+ 014A  B9 0002	 	 	 	MOV	CX,2
+ 014D  F3/ A6	 	 	 	REPZ	CMPSB
+ 014F  75 3A	 	 	 	JNE	INT_SET
+ 	 	 	 	 	
+ 0151  B4 09	 	 	 	MOV	AH,09
+ 0153  BA 01B0 R	 	 	MOV	DX,OFFSET M0
+ 0156  CD 21	 	 	 	INT	21H
+ 	 	 	 	 	
+ 0158  8B 1E 0103 R	 	 	MOV	BX,OLD_OFF
+ 015C  8E 06 0105 R	 	 	MOV	ES,OLD_SEG
+ 0160  26: 8B 57 FA	 	 	MOV	DX,ES:[BX-6]
+ 0164  26: 8E 5F FC	 	 	MOV	DS,ES:[BX-4]
+ 0168  B4 25	 	 	 	MOV	AH,25H
+ 016A  B0 15	 	 	 	MOV	AL,INT_NO
+ 016C  CD 21	 	 	 	INT	21H
+ 	 	 	 	 	
+ 016E  2E: 8E 06 0105 R	 	 	MOV	ES,CS:OLD_SEG
+ 0173  26: 8E 06 002C	 	 	MOV	ES,WORD PTR ES:[002CH]
+ 0178  B4 49	 	 	 	MOV	AH,49H
+ 017A  CD 21	 	 	 	INT	21H
+ 017C  2E: 8E 06 0105 R	 	 	MOV	ES,CS:OLD_SEG
+ 0181  B4 49	 	 	 	MOV	AH,49H
+ 0183  CD 21	 	 	 	INT	21H
+ 	 	 	 	 	
+ 	 	 	 	 	EXIT
+ 0185  32 C0                  +	 	 	 	XOR AL,AL
+ 0187  B4 4C                  +	 	 	 	MOV	AH,4CH
+ 0189  CD 21                  +	 	 	 	INT	21H
+ 	 	 	 	
+ 018B	 	 	 	INT_SET:
+ 018B  B4 09	 	 	 	MOV	AH,09H
+ 018D  BA 0206 R	 	 	MOV	DX,OFFSET M1
+ 0190  CD 21	 	 	 	INT	21H
+ 	 	 	 	 	
+ 0192  BA 0109 R	 	 	MOV	DX,OFFSET ENT
+ 0195  B4 25	 	 	 	MOV	AH,25H
+ 0197  B0 15	 	 	 	MOV	AL,INT_NO
+ 0199  CD 21	 	 	 	INT	21H
+ 	 	 	 	 	
+ 019B  BA 0134 R	 	 	MOV	DX,OFFSET SIZE1
+ 019E  B1 04	 	 	 	MOV	CL,4
+ 01A0  D3 EA	 	 	 	SHR	DX,CL
+ 01A2  B8 3100	 	 	 	MOV	AX,3100H
+ 01A5  CD 21	 	 	 	INT	21H
+ 	 	 	 	 	
+ 	 	 	 	 	EXIT
+ Microsoft MACRO Assembler  Version 3.00               	Page	1-5
+	 	 	 	 	 	 	 	01-10-96    
+
+
+ 01A7  32 C0                  +	 	 	 	XOR AL,AL
+ 01A9  B4 4C                  +	 	 	 	MOV	AH,4CH
+ 01AB  CD 21                  +	 	 	 	INT	21H
+ 	 	 	 	 	
+ 01AD  46 39 00	 	 	CHK	DB	"F9",0
+ 01B0  46 39 20 20 56 65	M0	DB	"F9  Ver 1.00 (C) CopyRight by 
+	 	 	 	Takeo   All Rights Reserved (C)"
+       72 20 31 2E 30 30	
+       20 28 43 29 20 43	
+       6F 70 79 52 69 67	
+       68 74 20 62 79 20	
+       54 61 6B 65 6F 20	
+       20 20 41 6C 6C 20	
+       52 69 67 68 74 73	
+       20 52 65 73 65 72	
+       76 65 64 20 28 43	
+       29	 	 	
+ 01ED  0D 0A	 	 	 	DB	CR,LF
+ 01EF  46 39 2E 43 4F 4D	 	DB	"F9.COM  âï˙ÇµÇ‹ÇµÇΩÅB$"
+       20 20 89 F0 95 FA	
+       82 B5 82 DC 82 B5	
+       82 BD 81 42 24	 	
+ 	 	 	 	
+ 0206  46 39 20 20 56 65	M1	DB	"F9  Ver 1.00 (C) CopyRight by 
+	 	 	 	Takeo   All Rights Reserved (C)"
+       72 20 31 2E 30 30	
+       20 28 43 29 20 43	
+       6F 70 79 52 69 67	
+       68 74 20 62 79 20	
+       54 61 6B 65 6F 20	
+       20 20 41 6C 6C 20	
+       52 69 67 68 74 73	
+       20 52 65 73 65 72	
+       76 65 64 20 28 43	
+       29	 	 	
+ 0243  0D 0A	 	 	 	DB	CR,LF
+ 0245  46 39 2E 43 4F 4D	 	DB	"F9.COM  èÌíìÇµÇ‹ÇµÇΩÅB$"
+       20 20 8F ED 92 93	
+       82 B5 82 DC 82 B5	
+       82 BD 81 42 24	 	
+ 	 	 	 	 	
+ 	 	 	 	 	SEGEND
+ 025C                         +	 	 	 	_TEXT	ENDS
+ 	 	 	 	
+ 	 	 	 	 	END	@S
+
+ Microsoft MACRO Assembler  Version 3.00               	Page	Symbols
+	 	 	 	-1
+	 	 	 	 	 	 	 	01-10-96    
+
+
+Macros:
+
+	 	N a m e  	 	Length
+
+COMSEG . . . . . . . . . . . . .	0005
+DSEG . . . . . . . . . . . . . .	0002
+EXIT . . . . . . . . . . . . . .	0003
+PSEG . . . . . . . . . . . . . .	0002
+SEGEND . . . . . . . . . . . . .	0001
+STACK. . . . . . . . . . . . . .	0003
+
+Segments and Groups:
+
+	 	N a m e	 	 	Size	Align	Combine	Class
+
+_TEXT. . . . . . . . . . . . . .	025C	WORD  	PUBLIC	'CODE'
+
+Symbols:            
+
+	 	N a m e	 	 	Type	Value	Attr         
+
+BEEP . . . . . . . . . . . . . .	L NEAR 	0000	 	External
+BREAK. . . . . . . . . . . . . .	Number	0003	
+BS . . . . . . . . . . . . . . .	Number	0008	
+CHK. . . . . . . . . . . . . . .	L BYTE 	01AD	_TEXT
+CLS. . . . . . . . . . . . . . .	Number	001A	
+CR . . . . . . . . . . . . . . .	Number	000D	
+CTOH . . . . . . . . . . . . . .	L NEAR 	0000	 	External
+DEL. . . . . . . . . . . . . . .	Number	007F	
+DTA. . . . . . . . . . . . . . .	L BYTE 	0080	_TEXT	Length =0080
+END_1. . . . . . . . . . . . . .	L NEAR 	012C	_TEXT
+ENT. . . . . . . . . . . . . . .	L NEAR 	0109	_TEXT
+EOF. . . . . . . . . . . . . . .	Number	- 0001	
+ESC. . . . . . . . . . . . . . .	Number	001B	
+HOME . . . . . . . . . . . . . .	Number	001E	
+HTOC . . . . . . . . . . . . . .	L NEAR 	0000	 	External
+INS. . . . . . . . . . . . . . .	Number	0012	
+INT_NO . . . . . . . . . . . . .	Number	0015	
+INT_SET. . . . . . . . . . . . .	L NEAR 	018B	_TEXT
+J1 . . . . . . . . . . . . . . .	L NEAR 	0116	_TEXT
+LF . . . . . . . . . . . . . . .	Number	000A	
+M0 . . . . . . . . . . . . . . .	L BYTE 	01B0	_TEXT
+M1 . . . . . . . . . . . . . . .	L BYTE 	0206	_TEXT
+NUL. . . . . . . . . . . . . . .	Number	0000	
+OLD_OFF. . . . . . . . . . . . .	L WORD 	0103	_TEXT
+OLD_SEG. . . . . . . . . . . . .	L WORD 	0105	_TEXT
+PALETTE. . . . . . . . . . . . .	L NEAR 	0000	 	External
+PARA . . . . . . . . . . . . . .	L NEAR 	0000	 	External
+SET. . . . . . . . . . . . . . .	L NEAR 	0134	_TEXT
+SIN. . . . . . . . . . . . . . .	L BYTE 	0107	_TEXT
+SIZE1. . . . . . . . . . . . . .	E NEAR 	0134	_TEXT
+SPC. . . . . . . . . . . . . . .	Number	0020	
+STK_AL . . . . . . . . . . . . .	L BYTE 	0132	_TEXT
+ Microsoft MACRO Assembler  Version 3.00               	Page	Symbols
+	 	 	 	-2
+	 	 	 	 	 	 	 	01-10-96    
+
+
+TAB. . . . . . . . . . . . . . .	Number	0009	
+WAIT1. . . . . . . . . . . . . .	L NEAR 	0000	 	External
+@S . . . . . . . . . . . . . . .	L NEAR 	0100	_TEXT
+
+48236 Bytes free   
+
+Warning Severe
+Errors	Errors 
+0	1

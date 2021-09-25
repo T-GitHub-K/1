@@ -1,0 +1,6 @@
+MASM %1;
+LIB UTY -+%1,UTY,UTY
+DEL %1.OBJ
+
+
+

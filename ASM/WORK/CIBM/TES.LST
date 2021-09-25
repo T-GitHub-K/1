@@ -1,0 +1,327 @@
+ Microsoft MACRO Assembler  Version 3.00               	Page	1-1
+	 	 	 	 	 	 	 	06-06-98    
+
+
+1	 	 	 	 	;**************************************
+	 	 	 	**************************
+2	 	 	 	 	;*	 	 	 	
+ 	 	 	 	 	 	 	 	*
+3	 	 	 	 	;*	∑-Œﬁ-ƒﬁ ﬁØÃßÇ…Çe9Çíºê⁄ì¸óÕ
+	 	 	 	 	 	 	 	*
+4	 	 	 	 	;*	 	 	 	
+ 	 	 	 	 	 	 	 	*
+5	 	 	 	 	;**************************************
+	 	 	 	**************************
+6	 	 	 	 	
+7	 	 	 	 	
+8	                             C	INCLUDE STD.H
+9	                             C	ENDIF
+10	                             C	;--------------------------------------
+	 	 	 	--------------------------
+11	                             C	;	286 ÕØ¿ﬁ∞	 	
+ 	 	 	 	 	 	 	 	
+12	                             C	;	 	 	 	
+ 	 	 	 	 	 	 	 	
+13	                             C	;	CPU 286ÇÃägí£ñΩóﬂÉZÉbÉg	
+ 	 	 	 	 	 	 	 	
+14	                             C	;--------------------------------------
+	 	 	 	--------------------------
+15	                             C	
+16	                             C	.286c
+17	                             C	
+18	 = 0000                      C	NUL	EQU	0H
+19	 = 0003                      C	BREAK	EQU	03H
+20	 = 0008                      C	BS	EQU	08H
+21	 = 000A                      C	LF	EQU	0AH
+22	 = 000D                      C	CR	EQU	0DH
+23	 = 001A                      C	CLS	EQU	1AH
+24	 = 001B                      C	ESC	EQU	1BH
+25	 = 001E                      C	HOME	EQU	1EH
+26	 = 0020                      C	SPC	EQU	20H
+27	 = 007F                      C	DEL	EQU	7FH
+28	 =-0001                      C	EOF	EQU	-1
+29	 = 0012                      C	INS	EQU	12H
+30	 = 0009                      C	TAB	EQU	09H
+31	                             C	;--------------------------------------
+	 	 	 	---------------------------------------
+32	                             C	EXTRN	BEEP:NEAR	 	;âπÇ»ÇÁ
+	 	 	 	Ç∑
+33	                             C	EXTRN	CTOH:NEAR	 	;∑¨◊∏¿∞
+	 	 	 	ÇHEXÇ…ïœä∑
+34	                             C	EXTRN	HTOC:NEAR	 	;HEXÇ∑
+	 	 	 	¨◊∏¿∞Ç…ïœä∑
+35	                             C	EXTRN	PALETTE:NEAR	;éwíË ﬂ⁄ØƒÇâÊñ
+	 	 	 	 Ç…ï\é¶
+36	                             C	EXTRN	PARA:NEAR	 	;DTAÇÃï
+	 	 	 	∂éöóÒéÊìæ
+37	                             C	EXTRN	WAIT1:NEAR	 	;≥¥≤ƒ
+38	                             C	;--------------------------------------
+ Microsoft MACRO Assembler  Version 3.00               	Page	1-2
+	 	 	 	 	 	 	 	06-06-98    
+
+
+	 	 	 	---------------------------------------
+39	                             C	;
+40	                             C	;
+41	                             C	;	ÇlÇ`ÇbÇqÇn
+42	                             C	;
+43	                             C	;
+44	                             C	
+45	                             C	;--ÉZÉOÉÅÉìÉg--------------------------
+	 	 	 	-----------------------------
+46	                             C	
+47	                             C	PSEG	MACRO
+48	                             C	 	_TEXT	SEGMENT	WORD PUBLIC 'CO
+	 	 	 	DE'
+49	                             C	ENDM
+50	                             C	
+51	                             C	DSEG	MACRO
+52	                             C	 	_DATA	SEGMENT	WORD PUBLIC 'DA
+	 	 	 	TA'
+53	                             C	ENDM
+54	                             C	
+55	                             C	;--COMå`éÆÇÃÉZÉOÉÅÉìÉg-----------------
+	 	 	 	------------------------------
+56	                             C	
+57	                             C	COMSEG	MACRO
+58	                             C	
+59	                             C	 	_TEXT	SEGMENT	WORD PUBLIC 'CO
+	 	 	 	DE'
+60	                             C	 	 	 	ASSUME	CS:_TEX
+	 	 	 	T,DS:_TEXT,ES:_TEXT,SS:_TEXT
+61	                             C	
+62	                             C	 	 	 	ORG	80H
+63	                             C	 	 	 	DTA	DB
+	 	 	 	 	80H 	DUP(0)
+64	                             C	 	 	 	ORG	100H
+65	                             C	ENDM
+66	                             C	
+67	                             C	;--ÉZÉOÉÅÉìÉgÇÃèIÇÌÇË------------------
+	 	 	 	------------------------------
+68	                             C	SEGEND	MACRO
+69	                             C	 	 	 	_TEXT	ENDS
+70	                             C	ENDM
+71	                             C	
+72	                             C	;--ÉvÉçÉZÉXèIóπ------------------------
+	 	 	 	------------------------------
+73	                             C	EXIT	MACRO	REG
+74	                             C	 	 	 	
+75	                             C	 	IFNB	<REG>
+76	                             C	 	 	 	MOV	AL,REG
+77	                             C	 	ELSE
+78	                             C	 	 	 	XOR AL,AL
+79	                             C	 	ENDIF
+80	                             C	 	 	 	MOV	AH,4CH
+81	                             C	 	 	 	INT	21H
+82	                             C	ENDM
+ Microsoft MACRO Assembler  Version 3.00               	Page	1-3
+	 	 	 	 	 	 	 	06-06-98    
+
+
+83	                             C	;--ÉXÉ^ÉbÉN----------------------------
+	 	 	 	------------------------------
+84	                             C	STACK	MACRO	SIZE
+85	                             C	 	 	 	
+86	                             C	 	IFNB	<SIZE>
+87	                             C	 	 	 	STACK_D	
+ 	 	 	 	 	DB	SIZE	DUP(0)
+88	                             C	 	ELSE
+89	                             C	 	 	 	STACK_D	
+ 	 	 	 	 	DB	128	 	DUP(0)
+90	                             C	 	ENDIF
+91	                             C	ENDM
+92	                             C	
+93	                             C	ENDIF
+94	                             C	INCLUDE MDOS.H
+95	                             C	.LIST
+96	 	 	 	 	
+97	 	 	 	 	 	COMSEG
+98	 0000                         +	 	_TEXT	SEGMENT	WORD PUBLIC 'CO
+	 	 	 	DE'
+99	 0080                         +	 	 	 	ORG	80H
+100	 0080     80 [                +	 	 	 	DTA	DB
+	 	 	 	 	80H 	DUP(0)
+101	 0100                         +	 	 	 	ORG	100H
+102	 	 	 	 	
+103	 	 	 	 	
+104	 0100	 	 	 	INPF9	PROC	NEAR
+105	 	 	 	 	
+106	 0100	 	 	 	START:
+107	 0100  8C C8	 	 	 	MOV	AX,CS
+108	 0102  8E D8	 	 	 	MOV	DS,AX
+109	 0104  8E C0	 	 	 	MOV	ES,AX
+110	 	 	 	 	
+111	 0106  B8 0500	 	 	 	MOV	AX,0500H
+112	 0109  B9 4300	 	 	 	MOV	CX,4300H
+113	 010C  CD 16	 	 	 	INT	16H
+114	 	 	 	 	 	
+115	 	 	 	 	 	
+116	 	 	 	 	
+117	 	 	 	 	 	END_PROCESS	 	;MACRO
+	 	 	 	 	RETURN_CODE
+118	 010E  B0 00                  +	 	 	MOV	AL,
+119	 0110  B4 4C                  +	 	 	MOV	AH,4CH
+120	 0112  CD 21                  +	 	 	INT	21H
+121	 	 	 	 	
+122	 0114	 	 	 	INPF9	ENDP
+123	 	 	 	 	
+124	 	 	 	 	 	SEGEND
+125	 0114                         +	 	 	 	_TEXT	ENDS
+126	 	 	 	 	
+127	 	 	 	 	 	END	START
+
+ Microsoft MACRO Assembler  Version 3.00               	Page	Symbols
+	 	 	 	-1
+	 	 	 	 	 	 	 	06-06-98    
+
+
+Macros:
+
+	 	N a m e  	 	Length
+
+ABS_DISK_READ. . . . . . . . . .	0003
+ABS_DISK_WRITE . . . . . . . . .	0003
+ALLOCATE_MEMORY. . . . . . . . .	0002
+ALLOC_START. . . . . . . . . . .	0002
+AUX_INPUT. . . . . . . . . . . .	0001
+AUX_OUTPUT . . . . . . . . . . .	0002
+CHANGE_ATTR. . . . . . . . . . .	0003
+CHANGE_DIR . . . . . . . . . . .	0002
+CHECK_KBD_STATUS . . . . . . . .	0001
+CLOSE. . . . . . . . . . . . . .	0002
+CLOSE_HANDLE . . . . . . . . . .	0002
+COMSEG . . . . . . . . . . . . .	0005
+CREATE . . . . . . . . . . . . .	0002
+CREATE_HANDLE. . . . . . . . . .	0002
+CREATE_NEW . . . . . . . . . . .	0002
+CREATE_PSP . . . . . . . . . . .	0002
+CREATE_TEMP. . . . . . . . . . .	0002
+CTRL_C_CK. . . . . . . . . . . .	0002
+CURRENT_DISK . . . . . . . . . .	0001
+DEF_DRIVE_DATA . . . . . . . . .	0003
+DELETE . . . . . . . . . . . . .	0002
+DELETE_ENTRY . . . . . . . . . .	0002
+DIR_CONSOLE_INPUT. . . . . . . .	0001
+DIR_CONSOLE_IO . . . . . . . . .	0002
+DISK_RESET . . . . . . . . . . .	0001
+DISPLAY. . . . . . . . . . . . .	0002
+DISPLAY_CHAR . . . . . . . . . .	0002
+DRIVE_DATA . . . . . . . . . . .	0003
+DSEG . . . . . . . . . . . . . .	0002
+END_PROCESS. . . . . . . . . . .	0002
+EXEC . . . . . . . . . . . . . .	0007
+EXEC_OVL . . . . . . . . . . . .	0004
+EXIT . . . . . . . . . . . . . .	0003
+FILE_SIZE. . . . . . . . . . . .	0002
+FIND_FIRST_FILE. . . . . . . . .	0002
+FIND_NEXT_FILE . . . . . . . . .	0001
+FLUSH_AND_READ_KBD . . . . . . .	0002
+FREE_MEMORY. . . . . . . . . . .	0002
+GET_CODE . . . . . . . . . . . .	0001
+GET_COUNTRY. . . . . . . . . . .	0004
+GET_DIR. . . . . . . . . . . . .	0002
+GET_DISK_SPACE . . . . . . . . .	0002
+GET_DTA. . . . . . . . . . . . .	0001
+GET_ERROR. . . . . . . . . . . .	0001
+GET_PSP. . . . . . . . . . . . .	0001
+GET_SET_DATE_TIME. . . . . . . .	0003
+GET_STRING . . . . . . . . . . .	0002
+GET_TIME . . . . . . . . . . . .	0001
+GET_VECTOR . . . . . . . . . . .	0002
+ Microsoft MACRO Assembler  Version 3.00               	Page	Symbols
+	 	 	 	-2
+	 	 	 	 	 	 	 	06-06-98    
+
+
+GET_VERIFY . . . . . . . . . . .	0001
+GET_VERSION. . . . . . . . . . .	0001
+IOCTL_BLOCK. . . . . . . . . . .	0003
+IOCTL_CHANGE . . . . . . . . . .	0002
+IOCTL_CHAR . . . . . . . . . . .	0003
+IOCTL_DATA . . . . . . . . . . .	0002
+IOCTL_RETRY. . . . . . . . . . .	0003
+IOCTL_STATUS . . . . . . . . . .	0002
+KEEP_PROCESS . . . . . . . . . .	0003
+LOCK . . . . . . . . . . . . . .	0004
+MAKE_DIR . . . . . . . . . . . .	0002
+MOVE_PTR . . . . . . . . . . . .	0003
+OPEN . . . . . . . . . . . . . .	0002
+OPEN_HANDLE. . . . . . . . . . .	0002
+PARSE. . . . . . . . . . . . . .	0004
+PRINT_CHAR . . . . . . . . . . .	0002
+PSEG . . . . . . . . . . . . . .	0002
+RAN_BLOCK_READ . . . . . . . . .	0003
+RAN_BLOCK_WRITE. . . . . . . . .	0003
+READ_HANDLE. . . . . . . . . . .	0003
+READ_KBD . . . . . . . . . . . .	0001
+READ_KBD_AND_ECHO. . . . . . . .	0001
+READ_RAN . . . . . . . . . . . .	0002
+READ_SEQ . . . . . . . . . . . .	0002
+REM_DIR. . . . . . . . . . . . .	0002
+RENAME . . . . . . . . . . . . .	0002
+RENAME_FILE. . . . . . . . . . .	0003
+SEGEND . . . . . . . . . . . . .	0001
+SELECT_DISK. . . . . . . . . . .	0002
+SERACH_FIRST . . . . . . . . . .	0002
+SERACH_NEXT. . . . . . . . . . .	0002
+SET_BLOCK. . . . . . . . . . . .	0004
+SET_COUNTRY. . . . . . . . . . .	0004
+SET_DATA . . . . . . . . . . . .	0002
+SET_DTA. . . . . . . . . . . . .	0002
+SET_RELATIVE_RECORD. . . . . . .	0002
+SET_TIME . . . . . . . . . . . .	0003
+SET_VECTOR . . . . . . . . . . .	0003
+STACK. . . . . . . . . . . . . .	0003
+STAY_RESIDENT. . . . . . . . . .	0002
+TERMINATE_PROGRAM. . . . . . . .	0001
+UNLOCK . . . . . . . . . . . . .	0004
+VERIFY . . . . . . . . . . . . .	0002
+WRITE_HANDLE . . . . . . . . . .	0003
+WRITE_RAN. . . . . . . . . . . .	0002
+WRITE_SEQ. . . . . . . . . . . .	0002
+XDUP . . . . . . . . . . . . . .	0002
+XDUP2. . . . . . . . . . . . . .	0002
+
+Segments and Groups:
+
+	 	N a m e	 	 	Size	Align	Combine	Class
+
+ Microsoft MACRO Assembler  Version 3.00               	Page	Symbols
+	 	 	 	-3
+	 	 	 	 	 	 	 	06-06-98    
+
+
+_TEXT. . . . . . . . . . . . . .	0114	WORD  	PUBLIC	'CODE'
+
+Symbols:            
+
+	 	N a m e	 	 	Type	Value	Attr         
+
+BEEP . . . . . . . . . . . . . .	L NEAR 	0000	 	External
+BREAK. . . . . . . . . . . . . .	Number	0003	
+BS . . . . . . . . . . . . . . .	Number	0008	
+CLS. . . . . . . . . . . . . . .	Number	001A	
+CR . . . . . . . . . . . . . . .	Number	000D	
+CTOH . . . . . . . . . . . . . .	L NEAR 	0000	 	External
+DEL. . . . . . . . . . . . . . .	Number	007F	
+DTA. . . . . . . . . . . . . . .	L BYTE 	0080	_TEXT	Length =0080
+EOF. . . . . . . . . . . . . . .	Number	- 0001	
+ESC. . . . . . . . . . . . . . .	Number	001B	
+HOME . . . . . . . . . . . . . .	Number	001E	
+HTOC . . . . . . . . . . . . . .	L NEAR 	0000	 	External
+INPF9. . . . . . . . . . . . . .	N PROC	0100	_TEXT	Length =0014
+INS. . . . . . . . . . . . . . .	Number	0012	
+LF . . . . . . . . . . . . . . .	Number	000A	
+NUL. . . . . . . . . . . . . . .	Number	0000	
+PALETTE. . . . . . . . . . . . .	L NEAR 	0000	 	External
+PARA . . . . . . . . . . . . . .	L NEAR 	0000	 	External
+SPC. . . . . . . . . . . . . . .	Number	0020	
+START. . . . . . . . . . . . . .	L NEAR 	0100	_TEXT
+TAB. . . . . . . . . . . . . . .	Number	0009	
+WAIT1. . . . . . . . . . . . . .	L NEAR 	0000	 	External
+
+38568 Bytes free   
+
+Warning Severe
+Errors	Errors 
+0	0
