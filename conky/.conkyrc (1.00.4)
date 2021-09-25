@@ -72,43 +72,43 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
  
 conky.text = [[
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}SYSTEM${font}
-${color lightgreen} Version(Conky/Takeo): $color${conky_version} / 1.00.6
+${color lightgreen} Version(Conky/Takeo): $color${conky_version} / 1.00.4
 ${color lightgreen} Kernel:       $color ${sysname} ${kernel}
 ${color lightgreen} Uptime:       $color ${uptime}
 ${color lightgreen} DateTime:     $color ${time %c}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}CPU${font}
 ${color lightgreen} CPU Frequency: $color${freq_g}GHz / ${freq}MHz
 ${color lightgreen} Core1 Usage: $color${cpu cpu1}%${alignr}${color lightgreen} Temp: $color${hwmon 3 temp 2}℃
- ${cpugraph cpu1 16,300 808080 808080}
+ ${cpugraph cpu1 16,300 808080 ff5500}
 ${color lightgreen} Core2 Usage: $color${cpu cpu2}%${alignr}${color lightgreen} Temp: $color${hwmon 3 temp 4}℃
- ${cpugraph cpu2 16,300 808080 808080}
+ ${cpugraph cpu2 16,300 808080 ff8800}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}MEMORY${font}
 ${color lightgreen} RAM Usage: ${alignc}${color}$mem / $memmax
- $memperc% ${color 808080}${membar 4}
+ $memperc% ${color 6699ff}${membar 4}
 ${color lightgreen} Swap Usage: ${alignc}$color$swap / $swapmax
- $swapperc% ${color 808080}${swapbar 4}
+ $swapperc% ${color 669988}${swapbar 4}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}DISK${font}
 ${color lightgreen} / ${alignc} $color ${fs_used /} / ${fs_size /}
- ${fs_used_perc /}% ${color 808080}${fs_bar /}
+ ${fs_used_perc /}% ${color ff0000}${fs_bar /}
 ${color lightgreen} /home ${alignc} $color ${fs_used /home} / ${fs_size /home}
- ${fs_used_perc /home}% ${color 808080}${fs_bar /home}
+ ${fs_used_perc /home}% ${color aa0000}${fs_bar /home}
 ${color lightgreen} Disk Read:  $color${diskio_read /dev/sda}
- ${alignc}${diskiograph_read 16,300 808080 808080}
+ ${alignc}${diskiograph_read 16,300 808080 ffff00}
 ${color lightgreen} Disk Write: $color${diskio_write /dev/sda}
- ${alignc}${diskiograph_write 16,300 808080 808080}
+ ${alignc}${diskiograph_write 16,300 808080 ff00ff}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}NETWORK${font}
 ${color lightgreen} Wireless: ${color}${wireless_essid wlp2s0} - ${wireless_bitrate wlp2s0}
- ${wireless_link_qual_perc wlp2s0}% ${color 808080}${wireless_link_bar wlp2s0}
+ ${wireless_link_qual_perc wlp2s0}% ${color 008800}${wireless_link_bar wlp2s0}
 ${color lightgreen} Up  : ${color}${upspeed wlp2s0}k/s${color lightgreen}${alignr} TUp:    ${color}${totalup wlp2s0}
- ${color1}${alignc}${upspeedgraph wlp2s0 16,300 808080 808080}
+ ${color1}${alignc}${upspeedgraph wlp2s0 16,300 ffffff 00ff66}
 ${color lightgreen} Down: ${color}${downspeed wlp2s0}k/s${color lightgreen}${alignr} TDown:   ${color}${totaldown wlp2s0}
- ${color1}${alignc}${downspeedgraph wlp2s0 16,300 808080 808080}
+ ${color1}${alignc}${downspeedgraph wlp2s0 16,300 ffffff 0000ff}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}PROCESSES${font}
 ${color lightgreen} Name               PID    CPU     MEM
-${color f0f0f0} ${top name 1} ${top pid 1} ${top cpu 1}% ${top mem 1}%
-${color f0f0f0} ${top name 2} ${top pid 2} ${top cpu 2}% ${top mem 2}%
-${color f0f0f0} ${top name 3} ${top pid 3} ${top cpu 3}% ${top mem 3}%
-${color f0f0f0} ${top name 4} ${top pid 4} ${top cpu 4}% ${top mem 4}%
-${color f0f0f0} ${top name 5} ${top pid 5} ${top cpu 5}% ${top mem 5}%
+${color ff00ff} ${top name 1} ${top pid 1} ${top cpu 1}% ${top mem 1}%
+${color ff33ff} ${top name 2} ${top pid 2} ${top cpu 2}% ${top mem 2}%
+${color ff66ff} ${top name 3} ${top pid 3} ${top cpu 3}% ${top mem 3}%
+${color ff99ff} ${top name 4} ${top pid 4} ${top cpu 4}% ${top mem 4}%
+${color ffbbff} ${top name 5} ${top pid 5} ${top cpu 5}% ${top mem 5}%
 ]]
 
