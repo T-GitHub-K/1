@@ -72,7 +72,7 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
  
 conky.text = [[
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}SYSTEM${font}
-${color lightgreen} Version(Conky/Takeo): $color${conky_version} / 1.00.5a
+${color lightgreen} Version(Conky/Takeo):${alignr} $color${conky_version} / 1.00.6a
 ${color lightgreen} Kernel:       $color ${sysname} ${kernel}
 ${color lightgreen} Uptime:       $color ${uptime}
 ${color lightgreen} DateTime:     $color ${time %c}
@@ -83,25 +83,21 @@ ${color lightgreen} Core1 Usage: $color${cpu cpu1}%${alignr}${color lightgreen} 
 ${color lightgreen} Core2 Usage: $color${cpu cpu2}%${alignr}${color lightgreen} Temp: $color${hwmon 3 temp 4}℃
  ${cpugraph cpu2 16,300 808080 ff8800}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}MEMORY${font}
-${color lightgreen} RAM Usage: ${alignc}${color}$mem / $memmax
- $memperc% ${color 6699ff}${membar 4}
-${color lightgreen} Swap Usage: ${alignc}$color$swap / $swapmax
- $swapperc% ${color 669988}${swapbar 4}
+${color lightgreen} RAM: ${color} $mem / $memmax  ${alignr}$memperc% ${color 6699ff}${membar 4,100}
+${color lightgreen} Swap:$color$swap / $swapmax  ${alignr}$swapperc% ${color 669988}${swapbar 4,100}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}DISK${font}
-${color lightgreen} / ${alignc} $color ${fs_used /} / ${fs_size /}
- ${fs_used_perc /}% ${color ff0000}${fs_bar 4 /}
-${color lightgreen} /home ${alignc} $color ${fs_used /home} / ${fs_size /home}
- ${fs_used_perc /home}% ${color aa0000}${fs_bar 4 /home}
+${color lightgreen} /     ${color}${fs_used /} / ${fs_size /}${alignr}${fs_used_perc /}% ${color ff0000}${fs_bar 4,100 /}
+${color lightgreen} /home ${color}${fs_used /home} / ${fs_size /home}${alignr}${fs_used_perc /home}% ${color aa0000}${fs_bar 4,100 /home}
 ${color lightgreen} Disk Read:  $color${diskio_read /dev/sda}
  ${diskiograph_read 16,300 808080 ffff00}
 ${color lightgreen} Disk Write: $color${diskio_write /dev/sda}
  ${diskiograph_write 16,300 808080 ff00ff}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}NETWORK${font}
-${color lightgreen} Wireless: ${color}${wireless_essid wlp2s0} - ${wireless_bitrate wlp2s0}
- ${wireless_link_qual_perc wlp2s0}% ${color 008800}${wireless_link_bar 4 wlp2s0}
-${color lightgreen} Up  : ${color}${upspeed wlp2s0}k/s${color lightgreen}${alignr} TUp:    ${color}${totalup wlp2s0}
+${color lightgreen} Wireless: ${color}${wireless_essid wlp2s0} ${alignr}${wireless_bitrate wlp2s0}
+ ${alignr}${wireless_link_qual_perc wlp2s0}% ${color 008800}${wireless_link_bar 4,100 wlp2s0}
+${color lightgreen} Up  : ${color}${upspeed wlp2s0}k/s${color lightgreen}${alignr} TUp:   ${color}${totalup wlp2s0}
  ${upspeedgraph wlp2s0 16,300 808080 00ff66}
-${color lightgreen} Down: ${color}${downspeed wlp2s0}k/s${color lightgreen}${alignr} TDown:   ${color}${totaldown wlp2s0}
+${color lightgreen} Down: ${color}${downspeed wlp2s0}k/s${color lightgreen}${alignr} TDown:  ${color}${totaldown wlp2s0}
  ${downspeedgraph wlp2s0 16,300 808080 0000ff}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}PROCESSES${font}
 ${color lightgreen} Name               PID    CPU     MEM

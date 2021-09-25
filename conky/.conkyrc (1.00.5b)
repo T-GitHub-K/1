@@ -89,20 +89,20 @@ ${color lightgreen} Swap Usage: ${alignc}$color$swap / $swapmax
  $swapperc% ${color 808080}${swapbar 4}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}DISK${font}
 ${color lightgreen} / ${alignc} $color ${fs_used /} / ${fs_size /}
- ${fs_used_perc /}% ${color 808080}${fs_bar /}
+ ${fs_used_perc /}% ${color 808080}${fs_bar 4 /}
 ${color lightgreen} /home ${alignc} $color ${fs_used /home} / ${fs_size /home}
- ${fs_used_perc /home}% ${color 808080}${fs_bar /home}
+ ${fs_used_perc /home}% ${color 808080}${fs_bar 4 /home}
 ${color lightgreen} Disk Read:  $color${diskio_read /dev/sda}
- ${alignc}${diskiograph_read 16,300 808080 808080}
+ ${diskiograph_read 16,300 808080 808080}
 ${color lightgreen} Disk Write: $color${diskio_write /dev/sda}
- ${alignc}${diskiograph_write 16,300 808080 808080}
+ ${diskiograph_write 16,300 808080 808080}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}NETWORK${font}
 ${color lightgreen} Wireless: ${color}${wireless_essid wlp2s0} - ${wireless_bitrate wlp2s0}
- ${wireless_link_qual_perc wlp2s0}% ${color 808080}${wireless_link_bar wlp2s0}
+ ${wireless_link_qual_perc wlp2s0}% ${color 808080}${wireless_link_bar 4 wlp2s0}
 ${color lightgreen} Up  : ${color}${upspeed wlp2s0}k/s${color lightgreen}${alignr} TUp:    ${color}${totalup wlp2s0}
- ${color1}${alignc}${upspeedgraph wlp2s0 16,300 808080 808080}
+ ${upspeedgraph wlp2s0 16,300 808080 808080}
 ${color lightgreen} Down: ${color}${downspeed wlp2s0}k/s${color lightgreen}${alignr} TDown:   ${color}${totaldown wlp2s0}
- ${color1}${alignc}${downspeedgraph wlp2s0 16,300 808080 808080}
+ ${downspeedgraph wlp2s0 16,300 808080 808080}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}PROCESSES${font}
 ${color lightgreen} Name               PID    CPU     MEM
 ${color f0f0f0} ${top name 1} ${top pid 1} ${top cpu 1}% ${top mem 1}%
