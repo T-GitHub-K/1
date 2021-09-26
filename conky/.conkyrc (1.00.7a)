@@ -71,7 +71,8 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 }
  
 conky.text = [[
-${color ffa500}${alignc}${font sans-serif:bold:size=10}SYSTEM${font}
+#${color ffa500}${alignc}${font sans-serif:bold:size=10}SYSTEM ($nodename)${font}
+${color ffa500}${alignc}${font sans-serif:bold:size=10}$nodename${font}
 ${color lightgreen} Version(Conky/Takeo):${alignr} $color${conky_version} / 1.00.7a
 ${color lightgreen} Kernel:       $color ${sysname} ${kernel}
 ${color lightgreen} Uptime:       $color ${uptime}
