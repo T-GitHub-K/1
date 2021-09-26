@@ -93,8 +93,8 @@ ${color lightgreen} Disk Read:  $color${diskio_read /dev/sda}
 ${color lightgreen} Disk Write: $color${diskio_write /dev/sda}
  ${diskiograph_write 16,300 808080 ff00ff}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}NETWORK${font}
-${color lightgreen} Wireless: ${color}${wireless_essid wlp2s0} ${alignr}${wireless_bitrate wlp2s0}
- ${alignr}${wireless_link_qual_perc wlp2s0}% ${color 008800}${wireless_link_bar 4,100 wlp2s0}
+${color lightgreen} Wireless: ${color}${wireless_essid wlp2s0}
+${color lightgreen} Bitrate:  ${color}${wireless_bitrate wlp2s0}${alignr}${wireless_link_qual_perc wlp2s0}% ${color 008800}${wireless_link_bar 4,100 wlp2s0}
 ${color lightgreen} Up  : ${color}${upspeed wlp2s0}k/s${color lightgreen}${alignr} TUp:   ${color}${totalup wlp2s0}
  ${upspeedgraph wlp2s0 16,300 808080 00ff66}
 ${color lightgreen} Down: ${color}${downspeed wlp2s0}k/s${color lightgreen}${alignr} TDown:  ${color}${totaldown wlp2s0}
