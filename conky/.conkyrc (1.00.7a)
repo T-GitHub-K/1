@@ -73,29 +73,29 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 conky.text = [[
 #${color ffa500}${alignc}${font sans-serif:bold:size=10}SYSTEM ($nodename)${font}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}$nodename${font}
-${color lightgreen} Ver(Conky/Takeo):${alignr}$color${conky_version} / 1.00.7a
+${color lightgreen} Ver(Conky/Takeo):${alignr}$color${conky_version}/1.00.7a
 ${color lightgreen} Kernel:  $color ${sysname} ${kernel}
 ${color lightgreen} Uptime:  $color ${uptime}
-${color lightgreen} DateTime:$color ${time %Y年%m月%d日(%a)   %H:%M:%S}
+${color lightgreen} DateTime:$color ${time %Y-%m-%d [%a]  %H:%M:%S} 
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}CPU${font}
 ${color lightgreen} CPU Frequency: $color${freq_g}GHz / ${freq}MHz
-${color lightgreen} Core1:$color${cpu cpu1}%${alignr}${color lightgreen} Temp: $color${hwmon 3 temp 2}℃ ${cpugraph cpu1 16,100 808080 ff5500}
-${color lightgreen} Core2:$color${cpu cpu2}%${alignr}${color lightgreen} Temp: $color${hwmon 3 temp 4}℃ ${cpugraph cpu2 16,100 808080 ff8800}
+${color lightgreen} Core1:$color ${cpu cpu1}%${alignr}${color lightgreen} Temp: $color${hwmon 3 temp 2}℃ ${cpugraph cpu1 12,100 808080 ff5500}
+${color lightgreen} Core2:$color ${cpu cpu2}%${alignr}${color lightgreen} Temp: $color${hwmon 3 temp 4}℃ ${cpugraph cpu2 12,100 808080 ff8800}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}MEMORY${font}
-${color lightgreen} RAM: ${color} $mem / $memmax  ${alignr}$memperc% ${color 6699ff}${membar 6,70}
-${color lightgreen} Swap:$color$swap / $swapmax  ${alignr}$swapperc% ${color 669988}${swapbar 4,70}
+${color lightgreen} RAM:${color}  $mem / $memmax  ${alignr}$memperc% ${color 6699ff}${membar 6,70}
+${color lightgreen} Swap: $color$swap / $swapmax  ${alignr}$swapperc% ${color 669988}${swapbar 4,70}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}DISK${font}
 ${color lightgreen} /     ${color}${fs_used /} / ${fs_size /}${alignr}${fs_used_perc /}% ${color ff0000}${fs_bar 6,70 /}
 ${color lightgreen} /home ${color}${fs_used /home} / ${fs_size /home}${alignr}${fs_used_perc /home}% ${color aa0000}${fs_bar 4,70 /home}
-${color lightgreen} Read:  $color${diskio_read /dev/sda}${alignr}${diskiograph_read 16,100 808080 ffff00}
-${color lightgreen} Write: $color${diskio_write /dev/sda}${alignr}${diskiograph_write 16,100 808080 ff00ff}
+${color lightgreen} Read: $color${alignr}${diskio_read /dev/sda}          ${diskiograph_read 12,100 808080 ffff00}
+${color lightgreen} Write:$color${alignr}${diskio_write /dev/sda}          ${diskiograph_write 12,100 808080 ff00ff}
 ${color ffa500}${alignc}${font sans-serif:bold:size=10}NETWORK${font}
-${color lightgreen} ESSID:   ${color}${wireless_essid wlp2s0}
-${color lightgreen} Bitrate: ${color}${wireless_bitrate wlp2s0}${alignr}${wireless_link_qual_perc wlp2s0}% ${color 008800}${wireless_link_bar 6,70 wlp2s0}
-${color lightgreen} Up:${color}${upspeed wlp2s0}${color lightgreen}${alignr}${color}${totalup wlp2s0} ${upspeedgraph wlp2s0 16,100 808080 00ff66}
-${color lightgreen} Down:${color}${downspeed wlp2s0}${color lightgreen}${alignr}${color}${totaldown wlp2s0} ${downspeedgraph wlp2s0 16,100 808080 0000ff}
-${color ffa500}${alignc}${font sans-serif:bold:size=10}PROCESSES${font}
-${color lightgreen}${alignr}Name               PID     CPU     MEM
+${color lightgreen} Essid:   ${color}${wireless_essid wlp2s0}
+${color lightgreen} Bitrate:${color} ${wireless_bitrate wlp2s0}${alignr}${wireless_link_qual_perc wlp2s0}% ${color 008800}${wireless_link_bar 6,70 wlp2s0}
+${color lightgreen} Up:${color}${alignr}${upspeed wlp2s0}${color}   ${totalup wlp2s0} ${upspeedgraph wlp2s0 12,100 808080 00ff66}
+${color lightgreen} Down:${color}${alignr}${downspeed wlp2s0}${color}  ${totaldown wlp2s0} ${downspeedgraph wlp2s0 12,100 808080 0000ff}
+#${color ffa500}${alignc}${font sans-serif:bold:size=10}PROCESSES${font}
+${color lightgreen}  Name              PID    CPU     MEM
 ${color ff00ff}${alignr} ${top name 1} ${top pid 1} ${top cpu 1}% ${top mem 1}%
 ${color ff33ff}${alignr} ${top name 2} ${top pid 2} ${top cpu 2}% ${top mem 2}%
 ${color ff66ff}${alignr} ${top name 3} ${top pid 3} ${top cpu 3}% ${top mem 3}%
