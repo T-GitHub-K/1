@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
 conky.config = {
-    alignment = 'bottom_right',
+    alignment = 'middle_right',
     background = false,
     border_width = 0,
     cpu_avg_samples = 2,
@@ -71,14 +71,12 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 }
  
 conky.text = [[
-${color ffa500}${alignc}${font sans-serif:bold:size=10}PROCESSES${font}
-${color lightgreen}${alignr} Name             PID     CPU     MEM
-${color ff00ff}${alignr} ${top name 1} ${top pid 1} ${top cpu 1}% ${top mem 1}%
-${color ff33ff}${alignr} ${top name 2} ${top pid 2} ${top cpu 2}% ${top mem 2}%
-${color ff66ff}${alignr} ${top name 3} ${top pid 3} ${top cpu 3}% ${top mem 3}%
-${color ff99ff}${alignr} ${top name 4} ${top pid 4} ${top cpu 4}% ${top mem 4}%
-${color ffbbff}${alignr} ${top name 5} ${top pid 5} ${top cpu 5}% ${top mem 5}%
-
-
+${color ffa500}${alignc}${font sans-serif:bold:size=9}CPU${font}
+${color lightgreen} Core1:$color ${freq_g 1}GHz${alignr}$color${hwmon 3 temp 2}℃  ${cpu cpu1}% ${color ff8800}${cpubar cpu1 6,70}
+${color lightgreen}       $color ${freq_g 2}GHz${alignr}$color${hwmon 3 temp 1}    ${cpu cpu2}% ${color ff7700}${cpubar cpu2 6,70}
+${color lightgreen} Core2:$color ${freq_g 3}GHz${alignr}$color${hwmon 3 temp 4}℃  ${cpu cpu3}% ${color ff6600}${cpubar cpu3 6,70}
+${color lightgreen}       $color ${freq_g 4}GHz${alignr}$color${hwmon 3 temp 3}    ${cpu cpu4}% ${color ff5500}${cpubar cpu4 6,70}
+#${color lightgreen} Core1:$color ${freq_g 1}GHz${alignr}$color${hwmon 3 temp 2}℃ ${cpu cpu1}% ${cpugraph cpu1 12,100 808080 ff5500}
+#${color lightgreen} Core2:$color ${freq_g 2}GHz${alignr}$color${hwmon 3 temp 4}℃ ${cpu cpu2}% ${cpugraph cpu2 12,100 808080 ff8800}
 ]]
 

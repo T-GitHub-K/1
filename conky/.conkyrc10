@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
 conky.config = {
-    alignment = 'top_right',
+    alignment = 'middle_right',
     background = false,
     border_width = 0,
     cpu_avg_samples = 2,
@@ -75,6 +75,6 @@ conky.text = [[
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}$nodename${font}
 ${color lightgreen} Ver:   $color ${conky_version}/1.00.8a${alignr}${uptime}
 ${color lightgreen} Kernel:$color ${sysname} ${kernel}
-${color lightgreen} DateTime:$color ${time %Y-%m-%d [%a]  %H:%M:%S}
+${color lightgreen} DateTime:$color ${time %Y-%m-%d [%a]  %H:%M:%S} 
 ]]
 

@@ -73,13 +73,14 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 conky.text = [[
 #${color ffa500}${alignc}${font sans-serif:bold:size=10}SYSTEM ($nodename)${font}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}$nodename${font}
-${color lightgreen} Ver(Conky/Takeo):${alignr}$color${conky_version}/1.00.8a
-${color lightgreen} Kernel:  $color ${sysname} ${kernel}
-${color lightgreen} Uptime:  $color ${uptime}
+${color lightgreen} Ver:   $color ${conky_version}/1.00.8a${alignr}${uptime}
+${color lightgreen} Kernel:$color ${sysname} ${kernel}
 ${color lightgreen} DateTime:$color ${time %Y-%m-%d [%a]  %H:%M:%S} 
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}CPU${font}
-${color lightgreen} Core1:$color ${freq_g 1}GHz${alignr}$color${hwmon 3 temp 2}℃ ${cpu cpu1}% ${cpugraph cpu1 12,100 808080 ff5500}
-${color lightgreen} Core2:$color ${freq_g 2}GHz${alignr}$color${hwmon 3 temp 4}℃ ${cpu cpu2}% ${cpugraph cpu2 12,100 808080 ff8800}
+${color lightgreen} Core1:$color ${freq_g 1}GHz${alignr}$color${hwmon 3 temp 2}℃  ${cpu cpu1}% ${color ff5500}${cpubar cpu1 6,70}
+${color lightgreen} Core1:$color ${freq_g 1}GHz${alignr}$color${hwmon 3 temp 4}℃  ${cpu cpu2}% ${color ff5500}${cpubar cpu2 6,70}
+#${color lightgreen} Core1:$color ${freq_g 1}GHz${alignr}$color${hwmon 3 temp 2}℃ ${cpu cpu1}% ${cpugraph cpu1 12,100 808080 ff5500}
+#${color lightgreen} Core2:$color ${freq_g 2}GHz${alignr}$color${hwmon 3 temp 4}℃ ${cpu cpu2}% ${cpugraph cpu2 12,100 808080 ff8800}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}MEMORY${font}
 ${color lightgreen} RAM:${color}  $mem / $memmax  ${alignr}$memperc% ${color 6699ff}${membar 6,70}
 ${color lightgreen} Swap: $color$swap / $swapmax  ${alignr}$swapperc% ${color 669988}${swapbar 4,70}
@@ -89,6 +90,7 @@ ${color lightgreen} /home ${color}${fs_used /home} / ${fs_size /home}${alignr}${
 ${color lightgreen} Read: $color${alignr}${diskio_read /dev/sda}          ${diskiograph_read 12,100 808080 ffff00}
 ${color lightgreen} Write:$color${alignr}${diskio_write /dev/sda}          ${diskiograph_write 12,100 808080 ff00ff}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}NETWORK${font}
+${color lightgreen} IP   :   ${color}${addr wlp2s0}
 ${color lightgreen} Essid:   ${color}${wireless_essid wlp2s0}
 ${color lightgreen} Bitrate:${color} ${wireless_bitrate wlp2s0}${alignr}${wireless_link_qual_perc wlp2s0}% ${color 008800}${wireless_link_bar 6,70 wlp2s0}
 ${color lightgreen} Up:${color}${alignr}${upspeed wlp2s0}${color}   ${totalup wlp2s0} ${upspeedgraph wlp2s0 12,100 808080 00ff66}

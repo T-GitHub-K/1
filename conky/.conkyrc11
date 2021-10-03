@@ -71,16 +71,11 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 }
  
 conky.text = [[
-#${color ffa500}${alignc}${font sans-serif:bold:size=10}SYSTEM ($nodename)${font}
-${color ffa500}${alignc}${font sans-serif:bold:size=9}$nodename${font}
-${color lightgreen} Ver:   $color ${conky_version}/1.00.9a${alignr}${uptime}
-${color lightgreen} Kernel:$color ${sysname} ${kernel}
-${color lightgreen} DateTime:$color ${time %Y-%m-%d [%a]  %H:%M:%S} 
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}CPU${font}
-${color lightgreen} CPU 1:$color ${freq_g 1}GHz${alignr}$color${hwmon 3 temp 1}    ${cpu cpu1}% ${color ff8800}${cpubar cpu1 6,70}
-${color lightgreen}     2:$color ${freq_g 2}GHz${alignr}$color${hwmon 3 temp 2}℃  ${cpu cpu2}% ${color ff7700}${cpubar cpu2 6,70}
-${color lightgreen}     3:$color ${freq_g 3}GHz${alignr}$color${hwmon 3 temp 3}    ${cpu cpu3}% ${color ff6600}${cpubar cpu3 6,70}
-${color lightgreen}     4:$color ${freq_g 4}GHz${alignr}$color${hwmon 3 temp 4}℃  ${cpu cpu4}% ${color ff5500}${cpubar cpu4 6,70}
+${color lightgreen} Core1:$color ${freq_g 1}GHz${alignr}$color${hwmon 3 temp 2}℃  ${cpu cpu1}% ${color ff8800}${cpubar cpu1 6,70}
+${color lightgreen}       $color ${freq_g 2}GHz${alignr}$color${hwmon 3 temp 1}    ${cpu cpu2}% ${color ff7700}${cpubar cpu2 6,70}
+${color lightgreen} Core2:$color ${freq_g 3}GHz${alignr}$color${hwmon 3 temp 4}℃  ${cpu cpu3}% ${color ff6600}${cpubar cpu3 6,70}
+${color lightgreen}       $color ${freq_g 4}GHz${alignr}$color${hwmon 3 temp 3}    ${cpu cpu4}% ${color ff5500}${cpubar cpu4 6,70}
 #${color lightgreen} Core1:$color ${freq_g 1}GHz${alignr}$color${hwmon 3 temp 2}℃ ${cpu cpu1}% ${cpugraph cpu1 12,100 808080 ff5500}
 #${color lightgreen} Core2:$color ${freq_g 2}GHz${alignr}$color${hwmon 3 temp 4}℃ ${cpu cpu2}% ${cpugraph cpu2 12,100 808080 ff8800}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}MEMORY${font}

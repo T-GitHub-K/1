@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
 conky.config = {
-    alignment = 'top_left',
+    alignment = 'bottom_right',
     background = false,
     border_width = 0,
     cpu_avg_samples = 2,
@@ -71,12 +71,8 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 }
  
 conky.text = [[
-${color ffa500}${alignc}${font sans-serif:bold:size=10}DISK${font}
-${color lightgreen} /     ${color}${fs_used /} / ${fs_size /}${alignr}${fs_used_perc /}% ${color ff0000}${fs_bar 4,100 /}
-${color lightgreen} /home ${color}${fs_used /home} / ${fs_size /home}${alignr}${fs_used_perc /home}% ${color aa0000}${fs_bar 4,100 /home}
-${color lightgreen} Read:  $color${diskio_read /dev/sda}${alignr}${diskiograph_read 16,150 808080 ffff00}
-${color lightgreen} Write: $color${diskio_write /dev/sda}${alignr}${diskiograph_write 16,150 808080 ff00ff}
-
-
+${color ffa500}${alignc}${font sans-serif:bold:size=9}MEMORY${font}
+${color lightgreen} RAM:${color}  $mem / $memmax  ${alignr}$memperc% ${color 6699ff}${membar 6,70}
+${color lightgreen} Swap: $color$swap / $swapmax  ${alignr}$swapperc% ${color 669988}${swapbar 4,70}
 ]]
 
