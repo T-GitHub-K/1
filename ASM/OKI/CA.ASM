@@ -4,15 +4,15 @@ INCLUDE	BIOS.H
 INCLUDE	MACRO.H
 INCLUDE	STD.H
 
-;-------------------    ░F▌w▓Х
+;-------------------    О©╫FО©╫wО©╫О©╫
 
-TI1_FGC	EQU	7				;░╪≈Ою╡ды▒O▄▌
+TI1_FGC	EQU	7				;О©╫О©╫О©╫О©╫О©╫О©╫О©╫ы▒OО©╫О©╫
 TI1_BGC	EQU	1
 
-TI2_FGC	EQU	7				;░╪≈Ою╡ды⌠√▄▌
+TI2_FGC	EQU	7				;О©╫О©╫О©╫О©╫О©╫О©╫О©╫ы⌠О©╫О©╫О©╫
 TI2_BGC	EQU	2
 
-TI3_FGC	EQU	7				;░╪≈Ою╡ды▌÷▄▌
+TI3_FGC	EQU	7				;О©╫О©╫О©╫О©╫О©╫О©╫О©╫ы▌О©╫О©╫О©╫
 TI3_BGC	EQU	3
 
 
@@ -22,23 +22,23 @@ CODE	SEGMENT	PUBLIC
 	ORG	100H
 S:
 
-	MOV	AX,2A00H			;╪╫ця┌л■N▄▌⌠З┌П▌Ф⌠╬
+	MOV	AX,2A00H			;О©╫О©╫О©╫я┌л■NО©╫О©╫О©╫О©╫О©╫О©╫О©╫Ф⌠╬
 	INT	21H
 
-	MOV	Y0,CX				;■N
-	MOV	M0,DH				;▄▌
+	MOV	Y0,CX				;О©╫N
+	MOV	M0,DH				;О©╫О©╫
 
-	MOV	YY,CX				;■N
-	MOV	MDAY,DX				;▄▌,⌠З
+	MOV	YY,CX				;О©╫N
+	MOV	MDAY,DX				;О©╫О©╫,О©╫О©╫
 
-	MOV	CL,6AH				;≈L▄ЬSCREEN с╟дч░щ▓Х
+	MOV	CL,6AH				;О©╫LО©╫О©╫SCREEN с╟О©╫ч░щ▓О©╫
 	MOV	AH,1				;
-	MOV	AL,2				;ц╥╫д & ╦чвл╗╞╦
-	MOV	DL,2				;VRAM ц╥╫д & ╦чвл╗╞╦≈L▄Ь
+	MOV	AL,2				;ц╥О©╫О©╫ & О©╫О©╫О©╫л╗О©╫О©╫
+	MOV	DL,2				;VRAM ц╥О©╫О©╫ & О©╫О©╫О©╫л╗О©╫О©╫О©╫LО©╫О©╫
 	PUSH	ES
 	INT	80H
 	POP	ES
-	
+
 	CALL	SUB_Z1
 	CALL	SUB_GR
 
@@ -488,10 +488,10 @@ SUB7_6:
 
 SUB_EXIT:
 
-	MOV	CL,6AH				;≈L▄ЬSCREEN с╟дч░щ▓Х
+	MOV	CL,6AH				;О©╫LО©╫О©╫SCREEN с╟О©╫ч░щ▓О©╫
 	MOV	AH,1				;
-	MOV	AL,0				;ц╥╫д ONLY
-	MOV	DL,0				;VRAM ц╥╫д ONLY
+	MOV	AL,0				;ц╥О©╫О©╫ ONLY
+	MOV	DL,0				;VRAM ц╥О©╫О©╫ ONLY
 	PUSH	ES
 	INT	80H
 	POP	ES
@@ -504,7 +504,7 @@ SUB_EXIT:
 
 
 MON	DB	0,31,28,31,30,31,30,31,31,30,31,30,31
-W	DW	"⌠З","▄▌","┴н","░┘","√ь","▀Ю","⌠y"
+W	DW	"О©╫О©╫","О©╫О©╫","О©╫О©╫","О©╫О©╫","О©╫О©╫","О©╫О©╫","О©╫y"
 WEKC	DB	2,7,7,7,7,7,5
 WDAY	DW	0101H,010FH,020BH,0315H,041DH,0503H,0504H,0505H,090FH
 	DW	0917H,0A0AH,0B03H,0B17H,0C17H
@@ -529,20 +529,20 @@ M	DB	0
 WEEK	DB	0
 HY	DB	8
 HX	DB	5
-TI	DB	" ░╪≈О ","$"
-TI1	DB	" ■N ","$"
-TI2	DB	" ▄▌ ",CR,LF,"$"
+TI	DB	" О©╫О©╫О©╫О©╫ ","$"
+TI1	DB	" О©╫N ","$"
+TI2	DB	" О©╫О©╫ ",CR,LF,"$"
 C	DB	0
 FLG	DB	0
 Y0	DW	1992
 M0	DB	10
-MSG	DB	"                                      ▒O■N         ",CR,LF
-	DB	"                                       │╙          ",CR,LF
-	DB	"                                ▒O▄▌ │╘  │╗ ▌÷▄▌   ",CR,LF
-	DB	"                                       │╚          ",CR,LF
-	DB	"                                      ▌÷■N         ",CR,LF
+MSG	DB	"                                      О©╫OО©╫N         ",CR,LF
+	DB	"                                       О©╫О©╫          ",CR,LF
+	DB	"                                О©╫OО©╫О©╫ О©╫О©╫  О©╫О©╫ О©╫О©╫О©╫О©╫   ",CR,LF
+	DB	"                                       О©╫О©╫          ",CR,LF
+	DB	"                                      О©╫О©╫О©╫N         ",CR,LF
 	DB	"                                                   "
-	DB	"▐I≈╧┌╥┌И┌ф┌╚┌м │q│√│r┌П┴÷┌╥","$"
+	DB	"О©╫IО©╫О©╫О©╫О©╫О©╫О©╫ф┌О©╫О©╫О©╫ О©╫qО©╫О©╫О©╫rО©╫О©╫О©╫О©╫О©╫О©╫","$"
 
 YY	DW	0
 MDAY	DW	0
