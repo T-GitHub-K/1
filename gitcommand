@@ -37,3 +37,14 @@ git push origin
 
 git pull origin main
 
+確認  
+git diff
+git diff --staged
+git status
+
+GUI確認
+gitk
+
+
+
+
