@@ -30,21 +30,21 @@ Are you sure you want to continue connecting (yes/no)?
 Hi username! You've successfully authenticated, but GitHub does not
 provide shell access.
 
+開発環境&github
+cd 公開
 
 git add .
 git commit -m "コメント"
+
+;GithubUPDATE
 git push origin
 
 git pull origin main
 
-確認  
+;確認  
 git diff
 git diff --staged
 git status
 
-GUI確認
+;GUI確認
 gitk
-
-
-
-
