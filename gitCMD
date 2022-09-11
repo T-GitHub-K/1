@@ -33,7 +33,10 @@ provide shell access.
 開発環境&github
 cd 公開
 
+;w->s
 git add .
+
+;s->r
 git commit -m "コメント"
 
 ;GithubUPDATE
@@ -41,10 +44,21 @@ git push origin
 
 git pull origin main
 
+;Restore
+;w 取り消し
+git restore FILNAME
+
+;s->w
+git restore -staged FILENAME
+
+
 ;確認  
+;r-w
 git diff
+;r-s
 git diff --staged
 git status
+git log
 
 ;GUI確認
 gitk
