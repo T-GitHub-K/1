@@ -1,0 +1,26 @@
+sudo su
+
+;VSC
+code .
+
+
+;Docker
+docker run hello-world
+
+code .
+docker image build -t sample/webrick:latest .
+docker image ls
+
+docker container run -d -p 8000:8000 --name webrick sample/webrick:latest
+;->localhost:8000
+
+docker container ls -a
+docker container stop webrick
+docker container rm webrick
+docker container ls -a
+
+docker system prune -a
+
+docker container exec webrick ruby -v
+docker container logs webrick
+
