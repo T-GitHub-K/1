@@ -12,23 +12,33 @@ git push -u origin main
 
 SSH
 ls ~/.ssh
-
 ssh-keygen -t rsa -C "pmailwork-005@yahoo.co.jp"
-
 git config remote.origin.url
-
 git remote set-url origin git@github.com:T-GitHub-K/1.git
-
 $ ssh -T git@github.com
 つぎのように表示されたら、落ち着いて yes と入力してください
-
 The authenticity of host 'github.com (207.97.227.239)' can't be established.
 RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
 Are you sure you want to continue connecting (yes/no)?
 接続に成功すると、つぎのようなメッセージになるはずです
-
 Hi username! You've successfully authenticated, but GitHub does not
 provide shell access.
+
+ls ~/.ssh
+ssh-keygen -t ed25519 -C "pmailwork-005@yahoo.co.jp"
+clip < ~/.ssh/id_ed25519.pub
+GitHubのヘッダー右上にあるプロフィール画像を押して、その中の「Settings（設定）」を押してください。
+左側のサイドメニューから、「SSH and GPG keys.」を押してください。 次に「New SSH Key」を押してください。
+New SSH Keyをクリック
+Title欄に任意の名前をつけてください。 Key欄に先ほどコピーした内容を貼り付けてください。
+ コピーができていない場合は、１つ手順を戻ってもう一度戻って実行してください。
+貼り付けることができたら、「Add SSH Key」を押してください。
+GitHubパスワードの確認を促された場合は、入力してください。
+これでGitHubでの設定が完了です。
+ssh -T git@github.com
+
+
+
 
 開発環境&github
 cd 公開
