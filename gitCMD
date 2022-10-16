@@ -64,3 +64,5 @@ git log
 gitk
 
 ;2022/10/16 Windowsで再構築 user/mysite
+;WindowsでGitの環境を構築をしよう
+;https://prog-8.com/docs/git-env-win
