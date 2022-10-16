@@ -62,3 +62,5 @@ git log
 
 ;GUI確認
 gitk
+
+;2022/10/16 Windowsで再構築 user/mysite
