@@ -25,15 +25,15 @@ with col1:
     '''
     st.code(code, language='python')
 
- """    # 画像 rは\がエスケープコードとして扱うのを無視させる為
-    image = Image.open('python/venv/012.jpg')
-    st.image(image, width=200)
+    # 画像 rは\がエスケープコードとして扱うのを無視させる為1
+    # image = Image.open('python/venv/012.jpg')
+    # st.image(image, width=200)
 
     # 動画
-    video_file = open('python/venv/file.mp4', 'rb')
-    video_bytes = video_file.read()
-    st.video(video_bytes)
- """
+    # video_file = open('python/venv/file.mp4', 'rb')
+    # video_bytes = video_file.read()
+    # st.video(video_bytes)
+
     with st.form(key='profile_form'):
         # テキストボックス
         name = st.text_input('名前')
