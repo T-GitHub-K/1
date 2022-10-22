@@ -3,9 +3,9 @@ import streamlit as st
 # C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\Scripts
 # streamlit run c:/Users/user/mysite/1/Python/venv/app.py
 import datetime
-# from PIL import Image
+from PIL import Image
 import pandas as pd
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 # テキスト
@@ -91,9 +91,8 @@ with col2:
     st.line_chart(df)
     st.bar_chart(df['2021年'])
 
-"""     # matplotlib
+    # matplotlib
     fig, ax = plt.subplots()
     ax.plot(df.index, df['2021年'])
     ax.set_title('matplotlib graph')
     st.pyplot(fig)
- """
