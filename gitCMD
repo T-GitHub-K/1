@@ -52,6 +52,13 @@ git commit -m "コメント"
 ;GithubUPDATE
 git push origin
 
+;GitHub -> ﾛｰｶﾙ　-> ﾜｰｸｽﾍﾟｰｽ
+この「git pull origin main」というのは省略可能で、
+$ git pull
+と入力するだけでも可能です。
+「git pull」と入力すると「git pull origin main」と同じ意味になります。
+この「git pull」は何をしているかというと、「git fetch origin main」と「git merge origin/main」を行ったのと同じことをしています。
+
 git pull origin main
 
 ;Restore
