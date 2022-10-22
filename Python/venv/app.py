@@ -3,7 +3,7 @@ import streamlit as st
 # C:\Users\user\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\Scripts
 # streamlit run c:/Users/user/mysite/1/Python/venv/app.py
 import datetime
-from PIL import Image
+# from PIL import Image
 import pandas as pd
 # import matplotlib.pyplot as plt
 
@@ -26,13 +26,13 @@ with col1:
     st.code(code, language='python')
 
     # 画像 rは\がエスケープコードとして扱うのを無視させる為1
-    # image = Image.open('python/venv/012.jpg')
-    # st.image(image, width=200)
+    image = Image.open('012.jpg')
+    st.image(image, width=200)
 
     # 動画
-    # video_file = open('python/venv/file.mp4', 'rb')
-    # video_bytes = video_file.read()
-    # st.video(video_bytes)
+    video_file = open('file.mp4', 'rb')
+    video_bytes = video_file.read()
+    st.video(video_bytes)
 
     with st.form(key='profile_form'):
         # テキストボックス
@@ -85,8 +85,7 @@ with col1:
 
 with col2:
     # データ分析関連
-    df = pd.read_csv(
-        r'C:\Users\user\mysite\1\Python\venv\平均気温.csv', index_col='月')
+    df = pd.read_csv('平均気温.csv', index_col='月')
     st.dataframe(df)
     st.table(df)
     st.line_chart(df)
