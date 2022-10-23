@@ -92,7 +92,7 @@ with col2:
     st.bar_chart(df['2021年'])
 
     # matplotlib
-    fig, ax = plt.subplots()
-    ax.plot(df.index, df['2021年'])
-    ax.set_title('matplotlib graph')
-    st.pyplot(fig)
+    # fig, ax = plt.subplots()
+    # ax.plot(df.index, df['2021年'])
+    # ax.set_title('matplotlib graph')
+    # st.pyplot(fig)
