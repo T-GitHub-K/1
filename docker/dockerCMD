@@ -1,4 +1,4 @@
-sudo su
+sudo su -i sudo -s
 
 ;VSC
 code .
