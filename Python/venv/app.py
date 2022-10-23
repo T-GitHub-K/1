@@ -91,9 +91,8 @@ with col2:
     st.line_chart(df)
     st.bar_chart(df['2021年'])
 
-"""     # matplotlib
-    fig, ax = plt.subplots()
-    ax.plot(df.index, df['2021年'])
-    ax.set_title('matplotlib graph')
-    st.pyplot(fig)
- """
+    # matplotlib
+    # fig, ax = plt.subplots()
+    # ax.plot(df.index, df['2021年'])
+    # ax.set_title('matplotlib graph')
+    # st.pyplot(fig)
