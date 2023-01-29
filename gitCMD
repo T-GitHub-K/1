@@ -37,6 +37,10 @@ GitHubパスワードの確認を促された場合は、入力してくださ�
 これでGitHubでの設定が完了です。
 ssh -T git@github.com
 
+git config remote.origin.url
+git remote set-url origin git@github.com:T-GitHub-K/1.git
+
+
 
 
 
