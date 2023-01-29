@@ -10,6 +10,9 @@ git remote add origin https://github.com/T-GitHub-K/1.git
 git branch -M main
 git push -u origin main
 
+clone
+git clone https://github.com/t-github-k/2.git
+
 SSH
 ls ~/.ssh
 ssh-keygen -t rsa -C "pmailwork-005@yahoo.co.jp"
@@ -42,12 +45,11 @@ git remote set-url origin git@github.com:T-GitHub-K/1.git
 
 user@dell-user1-ubuntu:~/pj1/1$ git config --global user.email "pmailwork-005@yahoo.co.jp"
 user@dell-user1-ubuntu:~/pj1/1$ git config --global user.name "T-GitHub-K"
-user@dell-user1-ubuntu:~/pj1/1$ git commit -m 
 
 
 
 開発環境&github
-cd 公開
+cd pj1
 
 ;w->s
 git add .
