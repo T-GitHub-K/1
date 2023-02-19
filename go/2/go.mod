@@ -1,4 +1,4 @@
-module 2
+module github.com/faiface/beep/speaker
 
 go 1.20
 
