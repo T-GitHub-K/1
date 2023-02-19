@@ -1,1 +1,7 @@
 go run main.go
+
+go get github.com/go-sql-driver/mysql
+
+go mod init sc
+go mod edit -module sc2
+
