@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"math"
 	"time"
+
+	"github.com/faiface/beep/speaker"
 )
 
 const dotDuration = 200 * time.Millisecond
@@ -97,16 +99,31 @@ func dash() {
 }
 
 func beep(d time.Duration) {
-	speaker, err := os.Open("/dev/audio")
+	err := speaker.Init(sampleRate, bufferSize)
 	if err != nil {
-		fmt.Println("Failed to open speaker:", err)
+		fmt.Println("Failed to initialize speaker:", err)
 		return
 	}
 	defer speaker.Close()
-	for t := 0; t < int(d)/10; t++ {
-		speaker.Write([]byte{1, 1, 1, 1, 1, 1, 1, 1})
-		time.Sleep(10 * time.Millisecond)
-		speaker.Write([]byte{0, 0, 0, 0, 0, 0, 0, 0})
-		time.Sleep(10 * time.Millisecond)
+
+	synth := beep.Synth{
+		SynthFunc: func(buf [][2]float64) (int, bool) {
+			for i := range buf {
+				t := float64(time.Now().UnixNano()) / 1e9
+				if t < float64(d)/1e9 {
+					buf[i][0] = 0.5 * (1 - math.Cos(2*math.Pi*440*t))
+					buf[i][1] = buf[i][0]
+				} else {
+					return i, false
+				}
+			}
+			return len(buf), true
+		},
 	}
+
+	done := make(chan bool)
+	speaker.Play(beep.Seq(synth, beep.Callback(func() {
+		done <- true
+	})))
+	<-done
 }
