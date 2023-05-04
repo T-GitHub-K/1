@@ -1,0 +1,262 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+fhcalw                  ICON    DISCARDABLE     "fhcalw.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+FHCALW_ABOUT DIALOG DISCARDABLE  6, 15, 139, 81
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Fhcalw95について"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    PUSHBUTTON      "OK",IDOK,45,60,50,14
+    ICON            fhcalw,IDC_STATIC,7,7,20,21
+    CTEXT           "Fhcalw95  Ver.0.91",IDC_STATIC,31,13,80,8,NOT WS_GROUP
+    CTEXT           "Copyright(C) 1995-1999 Sota",IDC_STATIC,7,29,125,8
+    CTEXT           "FHcalw95はFreeWareです",IDC_STATIC,7,44,125,8
+END
+
+FHCALW_SET DIALOG DISCARDABLE  3, 18, 195, 132
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "設定"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    CONTROL         "位取りの表示(&K)",150,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,7,112,10
+    CONTROL         "ESCキーでアイコン化(&I)",153,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,22,104,10
+    CONTROL         "２進表示(&2)",154,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,7,36,104,10
+    CONTROL         "ボタンを表示しない(&B)",152,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,50,120,10
+    CONTROL         "他のウインドウに隠れない(&T)",155,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,65,116,10
+    CTEXT           "色の設定",IDC_STATIC,138,7,40,8
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,130,16,58,63
+    PUSHBUTTON      "電卓(&L)...",160,134,20,50,14
+    PUSHBUTTON      "文字盤(&P)...",161,134,40,50,14
+    PUSHBUTTON      "文字(&X)...",162,134,60,50,14
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,7,80,7,8
+    LTEXT           "ホットキー",IDC_STATIC,17,80,60,8
+    LTEXT           "",170,17,93,90,8
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,14,91,100,11
+    LTEXT           "→",IDC_STATIC,117,93,11,8
+    PUSHBUTTON      "キー設定...",163,131,89,50,14
+    DEFPUSHBUTTON   "OK",IDOK,15,111,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,73,111,50,14
+    PUSHBUTTON      "ヘルプ",159,131,111,50,14
+END
+
+FHCALW_PROG DIALOG DISCARDABLE  6, 15, 195, 70
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    EDITTEXT        500,7,7,181,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "&OK",IDOK,12,49,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,72,49,50,14
+    PUSHBUTTON      "ヘルプ",501,132,49,50,14
+    CTEXT           "計算式を入力してください",IDC_STATIC,13,26,168,8,NOT 
+                    WS_GROUP
+    CTEXT           "例　#[数値]*#[個数]+3%=",IDC_STATIC,12,36,169,8,NOT 
+                    WS_GROUP
+END
+
+FHCALW_HOTKEY DIALOG DISCARDABLE  6, 15, 195, 109
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "ホットキーの設定"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    PUSHBUTTON      "OK",IDOK,15,88,50,14
+    PUSHBUTTON      "ヘルプ",171,73,88,50,14
+    PUSHBUTTON      "クリア",IDCANCEL,131,88,50,14
+    LTEXT           "",170,33,9,126,8
+    LTEXT           "ホットキーとして使うキーを押してください。",IDC_STATIC,
+                    14,24,157,8
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,29,7,136,12
+    LTEXT           "キーを押さないで[OK]をクリックしたときは",IDC_STATIC,14,
+                    40,158,8
+    LTEXT           "ホットキーを使用しない設定になります。",IDC_STATIC,14,
+                    49,153,8
+    LTEXT           "押し間違えたら[クリア]をクリックしてから",IDC_STATIC,15,
+                    65,158,8
+    LTEXT           "やり直してください。",IDC_STATIC,15,74,167,8
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VERSIONINFO_1 VERSIONINFO
+ FILEVERSION 0,9,1,0
+ PRODUCTVERSION 0,9,1,0
+ FILEFLAGSMASK 0x0L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041103a4"
+        BEGIN
+            VALUE "CompanyName", " \0"
+            VALUE "FileDescription", "Fhcalw95\0"
+            VALUE "FileVersion", "0, 9, 1, 0\0"
+            VALUE "InternalName", "Fhcalw95\0"
+            VALUE "LegalCopyright", "Copyright(C) 1995-1999 Sota\0"
+            VALUE "OriginalFilename", "FHCALW95.EXE\0"
+            VALUE "ProductName", "FHCAL for Windows95\0"
+            VALUE "ProductVersion", "0, 9, 1, 0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 932
+    END
+END
+
+#endif    // !_MAC
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    FHCALW_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 132
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 74
+    END
+
+    FHCALW_SET, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 188
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 125
+    END
+
+    FHCALW_PROG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 188
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 63
+    END
+
+    FHCALW_HOTKEY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 188
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 102
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+fhcalw ACCELERATORS DISCARDABLE 
+BEGIN
+    "C",            2000,                   VIRTKEY, CONTROL, NOINVERT
+    "V",            2001,                   VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          1091,                   VIRTKEY, NOINVERT
+    VK_F1,          2002,                   VIRTKEY, SHIFT, NOINVERT
+    VK_F2,          1093,                   VIRTKEY, NOINVERT
+    VK_F2,          2003,                   VIRTKEY, SHIFT, NOINVERT
+    VK_HOME,        1123,                   VIRTKEY, NOINVERT
+END
+
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
