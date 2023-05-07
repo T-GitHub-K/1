@@ -1,2 +1,2 @@
 /etc/conky
-
+/usr/bin/conky -b -c /etc/conky/conky.conf
