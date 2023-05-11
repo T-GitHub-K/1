@@ -71,7 +71,7 @@ conky.text = [[
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}$nodename${font}
 ${color lightgreen} Ver:   $color ${conky_version}/1.10.02${alignr}${uptime}
 ${color lightgreen} Kernel:$color ${sysname} ${kernel}
-${color lightgreen} DateTime:$color ${time %Y-%m-%d [%a]  %H:%M:%S} 
+${color lightgreen} DateTime:$color ${time %Y-%m-%d [%a]      %H:%M:%S} 
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}              CPU${font}${color ff5500}${alignr}${execi 1 sensors | grep 'Fan' | awk '{print $3 " RPM"}'}
 ${color lightgreen} CPU 1:$color ${freq_g 1}GHz${alignr}$color${hwmon 2 temp 1}    ${cpu cpu1}% ${color ff8800}${cpubar cpu1 12,70}
 ${color lightgreen}     2:$color ${freq_g 2}GHz${alignr}$color${hwmon 2 temp 2}    ${cpu cpu2}% ${color ff7700}${cpubar cpu2 12,70}
@@ -91,7 +91,7 @@ ${color lightgreen} IP   :   ${color}${addr wlp3s0}
 ${color lightgreen} Essid:   ${color}${wireless_essid wlp3s0}
 ${color lightgreen} Bitrate:${color} ${wireless_bitrate wlp3s0}${alignr}${wireless_link_qual_perc wlp3s0}% ${color 008800}${wireless_link_bar 12,70 wlp3s0}
 ${color lightgreen} Up  :${color}${alignr}${upspeed wlp3s0}${color}   ${totalup wlp3s0} ${upspeedgraph wlp3s0 18,100 808080 00ffff}
-${color lightgreen} Down:${color}${alignr}${downspeed wlp3s0}${color}   ${totaldown wlp3s0} ${downspeedgraph wlp3s0 18,100 808080 ffff00}
+${color lightgreen} Down:${color}${alignr}${downspeed wlp3s0}${color}   ${totaldown wlp3s0} ${downspeedgraph wlp3s0 18,100 808080 ff0000}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}PROCESSES${font}
 ${color lightgreen} Name               PID     CPU     MEM
 ${color ff00ff} ${top name 1} ${top pid 1} ${top cpu 1}% ${top mem 1}%
