@@ -1,10 +1,5 @@
-/etc/conky
-/usr/bin/conky -b -c /etc/conky/conky.conf
-
 #!/bin/bash
 sleep 5
 conky -b -c /etc/conky/conky.conf &
 sleep 5
 conky -b -c /etc/conky/conkyncal.conf &
-
-chmod 755 conkysh.sh
