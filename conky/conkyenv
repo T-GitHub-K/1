@@ -1,2 +1,10 @@
 /etc/conky
 /usr/bin/conky -b -c /etc/conky/conky.conf
+
+#!/bin/bash
+conky -b -c 設定ファイル1 &
+conky -b -c 設定ファイル2 &
+conky -b -c 設定ファイル3 &
+
+chmod 755 conky.sh
+
