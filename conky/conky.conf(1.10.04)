@@ -34,7 +34,7 @@ conky.config = {
     default_color = 'white',
     default_outline_color = 'white',
     default_shade_color = 'white',
-    double_bufer = true,
+    double_buffer = true,
     draw_borders = true,
     draw_graph_borders = true,
     draw_outline = false,
@@ -69,30 +69,30 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 conky.text = [[
 #${color ffa500}${alignc}${font sans-serif:bold:size=10}SYSTEM ($nodename)${font}
 #${color ffa500}${alignc}${font sans-serif:bold:size=9}$nodename${font}
-${color ffa500}${alignc}${font sans-serif:bold:size=9}${execi 3600 neofetch | grep 'Host' | cut -c 36-52}${font}
+${color ffa500}${alignc}${font sans-serif:bold:size=9}${exec neofetch | grep 'Host' | cut -c 36-52}${font}
 ${color lightgreen} Ver    $color ${conky_version}/1.10.04${alignr}${uptime}
-${color lightgreen} OS $color     ${execi 3600 neofetch | grep 'OS' | cut -c 35-64}${font}
+${color lightgreen} OS $color     ${exec neofetch | grep 'OS' | cut -c 35-64}${font}
 ${color lightgreen} Kernel $color ${sysname} ${kernel}
 ${color lightgreen} Date $color   ${time %Y-%m-%d [%a]}${alignr}${time %H:%M:%S} 
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}CPU${font}
-${color lightgreen}${execi 3600 neofetch | grep 'CPU' | cut -c 35-64}${font}${font}${color ffa500}${alignr}${execi 1 sensors | grep 'Fan' | awk '{print $3 " RPM"}'}
-${if_match ${cpu cpu1}>=70}${color lightgreen}       $color ${freq_g 1}GHz${alignr}$color${hwmon 2 temp 1}    ${cpu cpu1}% ${color ff0000}${cpubar cpu1 12,70}${else}${color lightgreen}       $color ${freq_g 1}GHz${alignr}$color${hwmon 2 temp 1}    ${cpu cpu1}% ${color 008800}${cpubar cpu1 12,70}${endif}
-${if_match ${cpu cpu2}>=70}${color lightgreen}       $color ${freq_g 2}GHz${alignr}$color${hwmon 2 temp 2}    ${cpu cpu2}% ${color ff0000}${cpubar cpu2 12,70}${else}${color lightgreen}       $color ${freq_g 2}GHz${alignr}$color${hwmon 2 temp 2}    ${cpu cpu2}% ${color 008800}${cpubar cpu2 12,70}${endif}
-${if_match ${cpu cpu3}>=70}${color lightgreen}       $color ${freq_g 3}GHz${alignr}$color${hwmon 2 temp 3}    ${cpu cpu3}% ${color ff0000}${cpubar cpu3 12,70}${else}${color lightgreen}       $color ${freq_g 3}GHz${alignr}$color${hwmon 2 temp 3}    ${cpu cpu3}% ${color 008800}${cpubar cpu3 12,70}${endif}
-${if_match ${cpu cpu4}>=70}${color lightgreen}       $color ${freq_g 4}GHz${alignr}$color${hwmon 2 temp 4}    ${cpu cpu4}% ${color ff0000}${cpubar cpu4 12,70}${else}${color lightgreen}       $color ${freq_g 4}GHz${alignr}$color${hwmon 2 temp 4}    ${cpu cpu4}% ${color 008800}${cpubar cpu4 12,70}${endif}
+${color lightgreen}${exec neofetch | grep 'CPU' | cut -c 35-64}${font}${font}${color ffa500}${alignr}${execi 1 sensors | grep 'Fan' | awk '{print $3 " RPM"}'}
+${if_match ${cpu cpu1}>=70}${color lightgreen}      $color ${freq_g 1}GHz${alignr}$color${hwmon 2 temp 1}    ${cpu cpu1}% ${color ff0000}${cpubar cpu1 12,70}${else}${color lightgreen}      $color ${freq_g 1}GHz${alignr}$color${hwmon 2 temp 1}    ${cpu cpu1}% ${color 008800}${cpubar cpu1 12,70}${endif}
+${if_match ${cpu cpu2}>=70}${color lightgreen}      $color ${freq_g 2}GHz${alignr}$color${hwmon 2 temp 2}    ${cpu cpu2}% ${color ff0000}${cpubar cpu2 12,70}${else}${color lightgreen}      $color ${freq_g 2}GHz${alignr}$color${hwmon 2 temp 2}    ${cpu cpu2}% ${color 008800}${cpubar cpu2 12,70}${endif}
+${if_match ${cpu cpu3}>=70}${color lightgreen}      $color ${freq_g 3}GHz${alignr}$color${hwmon 2 temp 3}    ${cpu cpu3}% ${color ff0000}${cpubar cpu3 12,70}${else}${color lightgreen}      $color ${freq_g 3}GHz${alignr}$color${hwmon 2 temp 3}    ${cpu cpu3}% ${color 008800}${cpubar cpu3 12,70}${endif}
+${if_match ${cpu cpu4}>=70}${color lightgreen}      $color ${freq_g 4}GHz${alignr}$color${hwmon 2 temp 4}    ${cpu cpu4}% ${color ff0000}${cpubar cpu4 12,70}${else}${color lightgreen}      $color ${freq_g 4}GHz${alignr}$color${hwmon 2 temp 4}    ${cpu cpu4}% ${color 008800}${cpubar cpu4 12,70}${endif}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}MEMORY${font}
 ${color lightgreen} RAM  ${color} $mem / $memmax  ${alignr}$memperc% ${color 6699ff}${membar 12,70}
 ${color lightgreen} Swap ${color} $swap / $swapmax  ${alignr}$swapperc% ${color 669988}${swapbar 12,70}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}DISK${font}
 ${color lightgreen} /root  ${color}${fs_used /} / ${fs_size /}${alignr}${fs_used_perc /}% ${color 6699ff}${fs_bar 12,70 /}
 #${color lightgreen} /home  ${color}${fs_used /home} / ${fs_size /home}${alignr}${fs_used_perc /home}% ${color aaa500}${fs_bar 12,70 /home}
-${color lightgreen} Read   $color${alignr}${diskio_read /dev/sda}          ${diskiograph_read 18,100 6699ff ffff00}
-${color lightgreen} Write $color${alignr}${diskio_write /dev/sda}          ${diskiograph_write 18,100 6699ff ff00ff}
+${color lightgreen} Read   $color${alignr}${diskio_read /dev/sda}          ${diskiograph_read 18,100 ffffff 6699ff}
+${color lightgreen} Write $color${alignr}${diskio_write /dev/sda}          ${diskiograph_write 18,100 ffffff 6699ff}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}NETWORK${font}
 ${color lightgreen} Essid    ${color}${wireless_essid wlp3s0}${alignr}${color}${addr wlp3s0}
 ${color lightgreen} Bitrate ${color} ${wireless_bitrate wlp3s0}${alignr}${wireless_link_qual_perc wlp3s0}% ${color 6699ff}${wireless_link_bar 12,70 wlp3s0}
-${color lightgreen} Up   ${color}${alignr}${upspeed wlp3s0}${color}   ${totalup wlp3s0} ${upspeedgraph wlp3s0 18,100 6699ff 00ffff}
-${color lightgreen} Down ${color}${alignr}${downspeed wlp3s0}${color}   ${totaldown wlp3s0} ${downspeedgraph wlp3s0 18,100 6699ff ff0000}
+${color lightgreen} Up   ${color}${alignr}${upspeed wlp3s0}${color}   ${totalup wlp3s0} ${upspeedgraph wlp3s0 18,100 ffffff 6699ff}
+${color lightgreen} Down ${color}${alignr}${downspeed wlp3s0}${color}   ${totaldown wlp3s0} ${downspeedgraph wlp3s0 18,100 ffffff 6699ff}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}PROCESSES${font}
 ${color lightgreen} Name               PID     CPU     MEM
 ${color ff00ff} ${top name 1} ${top pid 1} ${top cpu 1}% ${top mem 1}%
@@ -100,14 +100,6 @@ ${color ff33ff} ${top name 2} ${top pid 2} ${top cpu 2}% ${top mem 2}%
 ${color ff66ff} ${top name 3} ${top pid 3} ${top cpu 3}% ${top mem 3}%
 ${color ff99ff} ${top name 4} ${top pid 4} ${top cpu 4}% ${top mem 4}%
 ${color ffbbff} ${top name 5} ${top pid 5} ${top cpu 5}% ${top mem 5}%
-#${execpi 3600 cal -1 -C | sed 's/^/ /;s/ *$//'}
-#${font}${color}${execpi 30 cal}
-#${font}${color lightgreen}${execpi 3600 cal}
-#${if_match ${cpu cpu1}>=20}
-#It is 8am or later 10
-#${else}
-#It is before 8am
-#${endif}
 ${color}
 ]]
 
