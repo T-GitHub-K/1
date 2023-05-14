@@ -2,4 +2,4 @@
 sleep 5
 conky -b -c /etc/conky/conky.conf &
 sleep 5
-conky -b -c /etc/conky/conkyncal.conf &
+conky -b -c /etc/conky/conkycal.conf &
