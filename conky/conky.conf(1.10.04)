@@ -75,7 +75,7 @@ ${color lightgreen} OS $color     ${execi 3600 neofetch | grep 'OS' | cut -c 35-
 ${color lightgreen} Kernel $color ${sysname} ${kernel}
 ${color lightgreen} Date $color   ${time %Y-%m-%d [%a]}${alignr}${time %H:%M:%S} 
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}CPU${font}
-${color lightgreen}${execi 3600 neofetch | grep 'CPU' | cut -c 35-64}${color ffa500}${alignr}${execi 3600 sensors | grep 'Fan' | awk '{print $3 " RPM"}'}
+${color lightgreen}${execi 3600 neofetch | grep 'CPU' | cut -c 35-64}${color ffa500}${alignr}${execi 3 sensors | grep 'Fan' | awk '{print $3 " RPM"}'}
 ${if_match ${cpu cpu1}>=70}${color lightgreen}      $color ${freq_g 1}GHz${alignr}${hwmon 2 temp 1}    ${cpu cpu1}% ${color ff0000}${cpubar cpu1 12,70}${else}${color lightgreen}      $color ${freq_g 1}GHz${alignr}${hwmon 2 temp 1}    ${cpu cpu1}% ${color 008800}${cpubar cpu1 12,70}${endif}
 ${if_match ${cpu cpu2}>=70}${color lightgreen}      $color ${freq_g 2}GHz${alignr}${hwmon 2 temp 2}    ${cpu cpu2}% ${color ff0000}${cpubar cpu2 12,70}${else}${color lightgreen}      $color ${freq_g 2}GHz${alignr}${hwmon 2 temp 2}    ${cpu cpu2}% ${color 008800}${cpubar cpu2 12,70}${endif}
 ${if_match ${cpu cpu3}>=70}${color lightgreen}      $color ${freq_g 3}GHz${alignr}${hwmon 2 temp 3}    ${cpu cpu3}% ${color ff0000}${cpubar cpu3 12,70}${else}${color lightgreen}      $color ${freq_g 3}GHz${alignr}${hwmon 2 temp 3}    ${cpu cpu3}% ${color 008800}${cpubar cpu3 12,70}${endif}
