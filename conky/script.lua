@@ -18,3 +18,9 @@ function conky_cpuFanColor()
         return "${color red}"
     end
 end
+
+function cpuName()
+    local result = conky_parse("${execi 3600 neofetch | grep 'CPU' | cut -c 35-64}")
+    return result
+end
+
