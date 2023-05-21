@@ -8,3 +8,9 @@ sleep 5
 conky -b -c /etc/conky/conkyncal.conf &
 
 chmod 755 conkysh.sh
+
+df
+lscpu
+neofetch
+sensors
+

@@ -51,13 +51,13 @@ conky.config = {
     extra_newline = false,
     own_window = true,
     own_window_class = 'Conky',
-    own_window_type = 'dock',
+ -- own_window_type = 'dock',
+    own_window_type = 'normal',
     own_window_argb_visual = true,
     own_window_argb_value = 30,
-own_window_type = 'normal',
-own_window_transparent = true,
-own_window_argb_visual = true,
-own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
     stippled_borders = 0,
     update_interval = 1.0,
     uppercase = false,
@@ -69,9 +69,9 @@ own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 conky.text = [[
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}${execi 3600 neofetch | grep 'Host' | cut -c 36-52}${font}
 ${color lightgreen} Ver    $color ${conky_version}/1.10.07${alignr}${uptime}
-${color lightgreen} OS $color     ${execi 3600 neofetch | grep 'OS' | cut -c 35-64}
-${color lightgreen} Kernel $color ${sysname} ${kernel}
-${color lightgreen} Date $color   ${time %Y-%m-%d [%a]}${alignr}${time %H:%M:%S} 
+${color lightgreen} OS     $color ${execi 3600 neofetch | grep 'OS' | cut -c 35-64}
+${color lightgreen}        $color ${sysname} ${kernel}
+${color lightgreen} Date   $color ${time %Y-%m-%d [%a]}${font Monospace:size=10}${alignr}${time %H:%M:%S} 
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}CPU${font}
 #${lua cpuName}
 ${color lightgreen}${execi 3600 neofetch | grep 'CPU' | cut -c 35-64}${alignr}${if_match ${hwmon 3 fan 1}>=3000}${color ffa500}${alignr}${hwmon 3 fan 1} RPM${else}${color}${alignr}${hwmon 3 fan 1} RPM${endif}
@@ -84,13 +84,13 @@ ${color lightgreen} RAM  ${color} $mem / $memmax  ${alignr}$memperc% ${color 444
 ${color lightgreen} Swap ${color} $swap / $swapmax  ${alignr}$swapperc% ${color 444444}${swapbar 12,70}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}DISK${font}
 ${color lightgreen} /root  ${color}${fs_used /} / ${fs_size /}${alignr}${fs_used_perc /}% ${color 444444}${fs_bar 12,70 /}
-${color lightgreen} Read   $color${alignr}${diskio_read /dev/sda}          ${diskiograph_read 18,100 444444 444444}
-${color lightgreen} Write $color${alignr}${diskio_write /dev/sda}          ${diskiograph_write 18,100 444444 444444}
+${color lightgreen} Read   $color${alignr}${diskio_read /dev/sda}         ${diskiograph_read 18,100 444444 444444}
+${color lightgreen} Write  $color${alignr}${diskio_write /dev/sda}         ${diskiograph_write 18,100 444444 444444}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}NETWORK${font}
 ${color lightgreen} Essid    ${color}${wireless_essid wlp3s0}${alignr}${color}${addr wlp3s0}
 ${color lightgreen} Bitrate ${color} ${wireless_bitrate wlp3s0}${alignr}${wireless_link_qual_perc wlp3s0}% ${color 444444}${wireless_link_bar 12,70 wlp3s0}
-${color lightgreen} Up   ${color}${alignr}${upspeed wlp3s0}${color}   ${totalup wlp3s0} ${upspeedgraph wlp3s0 18,100 444444 444444}
-${color lightgreen} Down ${color}${alignr}${downspeed wlp3s0}${color}   ${totaldown wlp3s0} ${downspeedgraph wlp3s0 18,100 444444 444444}
+${color lightgreen} Up   ${color}${alignr}${upspeed wlp3s0}${color}  ${totalup wlp3s0} ${upspeedgraph wlp3s0 18,100 444444 444444}
+${color lightgreen} Down ${color}${alignr}${downspeed wlp3s0}${color} ${totaldown wlp3s0} ${downspeedgraph wlp3s0 18,100 444444 444444}
 ${color ffa500}${alignc}${font sans-serif:bold:size=9}PROCESSES${font}
 ${color lightgreen} Name                PID     CPU     MEM
 ${color aaaaaa}${alignr}${top name 1} ${top pid 1} ${top cpu 1}% ${top mem 1}%
