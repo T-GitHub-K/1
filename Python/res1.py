@@ -1,3 +1,4 @@
+ython3 res4
 def extract_lines_with_character(input_file, output_file, target_character):
     with open(input_file, 'r') as file:
         lines = file.readlines()  # テキストファイルの行ごとの内容を読み込む
