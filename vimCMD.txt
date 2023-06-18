@@ -1,6 +1,8 @@
 :%s/文字/文字/gc
 :%s:文字:文字:gc :%s://::gc
 :1,10S/文字
+:g!/a/d
+
 Ctrl+q Shif+i 文字 Esc
 u undo
 >> << Tab indent

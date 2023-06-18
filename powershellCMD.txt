@@ -1,0 +1,4 @@
+Get-Content -Path "C:\path\to\textfile.txt" | Select-String -Pattern "a|b" > "C:\path\to\output.txt"
+
+Get-Content -Path "C:\path\to\textfile.txt" | Select-String -Pattern "(?=.*a)(?=.*b)" > "C:\path\to\output.txt"
+
