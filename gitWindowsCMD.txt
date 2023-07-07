@@ -10,3 +10,6 @@ copy
 
 git clone
 git clone https://github.com/t-github-k/1.git
+
+git config --global user.email "pmailwork-005@yahoo.co.jp"
+git config --global user.name "T-GitHub-K"
