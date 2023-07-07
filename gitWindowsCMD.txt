@@ -4,8 +4,8 @@ https://qiita.com/hollyhock0518/items/a3fee20951cd92c87ed9
 
 
 copy
+c:\users\user
 .gitconfig
-.config
 .ssh
 
 git clone
