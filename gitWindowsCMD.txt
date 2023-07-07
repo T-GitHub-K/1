@@ -2,3 +2,11 @@
 
 https://qiita.com/hollyhock0518/items/a3fee20951cd92c87ed9
 
+
+copy
+.gitconfig
+.config
+.ssh
+
+git clone
+git clone https://github.com/t-github-k/1.git
