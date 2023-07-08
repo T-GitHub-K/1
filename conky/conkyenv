@@ -13,5 +13,6 @@ df
 lscpu
 neofetch
 sensors
+ip addr
 
 /sys/class/hwmon
