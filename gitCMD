@@ -19,6 +19,7 @@ cd 1
 ssh-keygen -t rsa -C "pmailwork-005@yahoo.co.jp"
 git config remote.origin.url
 git remote set-url origin git@github.com:T-GitHub-K/1.git
+
 ssh -T git@github.com
 つぎのように表示されたら、落ち着いて yes と入力してください
 The authenticity of host 'github.com (207.97.227.239)' can't be established.
@@ -44,8 +45,8 @@ ssh -T git@github.com
 git config remote.origin.url
 git remote set-url origin git@github.com:T-GitHub-K/1.git
 
-git config --global user.email "pmailwork-005@yahoo.co.jp"
-git config --global user.name "T-GitHub-K"
+#git config --global user.email "pmailwork-005@yahoo.co.jp"
+#git config --global user.name "T-GitHub-K"
 
 
 
