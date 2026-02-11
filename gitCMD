@@ -53,8 +53,8 @@ git remote set-url origin git@github.com:t-github-k/1.git
 git config remote.origin.url
 git remote set-url origin git@github.com:T-GitHub-K/1.git
 
-#git config --global user.email "pmailwork-005@yahoo.co.jp"
-#git config --global user.name "T-GitHub-K"
+git config --global user.email "pmailwork-005@yahoo.co.jp"
+git config --global user.name "T-GitHub-K"
 
 
 
