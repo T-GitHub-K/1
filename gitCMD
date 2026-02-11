@@ -42,13 +42,6 @@ GitHubパスワードの確認を促された場合は、入力してくださ�
 これでGitHubでの設定が完了です。
 ssh -T git@github.com
 
-git remote -v
-×origin  https://github.com/t-github-k/1.git (push)
-origin  git@github.com:t-github-k/1.git (fetch)
-origin  git@github.com:t-github-k/1.git (push)
-
-git remote set-url origin git@github.com:t-github-k/1.git
-
 
 git config remote.origin.url
 git remote set-url origin git@github.com:T-GitHub-K/1.git
@@ -56,6 +49,10 @@ git remote set-url origin git@github.com:T-GitHub-K/1.git
 git config --global user.email "pmailwork-005@yahoo.co.jp"
 git config --global user.name "T-GitHub-K"
 
+git remote -v
+×origin  https://github.com/t-github-k/1.git (push)
+origin  git@github.com:t-github-k/1.git (fetch)
+origin  git@github.com:t-github-k/1.git (push)
 
 
 開発環境&github
