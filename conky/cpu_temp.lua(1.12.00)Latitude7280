@@ -1,0 +1,29 @@
+-- ~/.conky/cpu_temp.lua
+
+function conky_pkg_temp()
+    local handle = io.popen("sensors | grep 'Package id 0' | awk '{print $4}'")
+    local result = handle:read("*a")
+    handle:close()
+    return result:gsub("\n", "")
+end
+
+function conky_temp2()
+    local handle = io.popen("sensors | grep 'temp2' | awk '{print $2}'")
+    local result = handle:read("*a")
+    handle:close()
+    return result:gsub("\n", "")
+end
+
+function conky_temp3()
+    local handle = io.popen("sensors | grep 'temp3' | awk '{print $2}'")
+    local result = handle:read("*a")
+    handle:close()
+    return result:gsub("\n", "")
+end
+
+function conky_temp4()
+    local handle = io.popen("sensors | grep 'temp4' | awk '{print $2}'")
+    local result = handle:read("*a")
+    handle:close()
+    return result:gsub("\n", "")
+end
