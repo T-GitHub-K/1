@@ -38,7 +38,9 @@ end
 function conky_cpu_bar_color(cpu_name)
     local cpu = tonumber(conky_parse("${cpu " .. cpu_name .. "}")) or 0
 
-    if cpu <= 50 then
+    if cpu <= 10 then
+        return "${color aaaaaa}"   -- 灰
+    elseif cpu <= 50 then
         return "${color 90ee90}"   -- 緑
     elseif cpu <= 80 then
         return "${color ffa500}"   -- 黄色
@@ -59,8 +61,10 @@ function conky_cpu_fan_color()
 
     local fan = tonumber(result:match("^%s*(.-)%s*$")) or 0
 
-    if fan <= 3000 then
+    if fan <= 0 then
         return "${color 444444}"   -- 灰
+    elseif fan <= 3000 then
+        return "${color aaaaaa}"   -- 灰色
     elseif fan <= 8000 then
         return "${color ffa500}"   -- 黄色
     else
