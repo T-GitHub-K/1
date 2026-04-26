@@ -5,35 +5,35 @@ function conky_cpu_fan()
     local handle = io.popen("sensors | grep 'Processor Fan' | awk '{print $3}'")
     local result = handle:read("*a")
     handle:close()
-    return result:gsub("\n", "")
+    return result:match("^%s*(.-)%s*$")
 end
 
 function conky_pkg_temp()
     local handle = io.popen("sensors | grep 'Package id 0' | awk '{print $4}'")
     local result = handle:read("*a")
     handle:close()
-    return result:gsub("\n", "")
+    return result:match("^%s*(.-)%s*$")
 end
 
 function conky_core0_temp()
     local handle = io.popen("sensors | grep 'Core 0' | awk '{print $3}'")
     local result = handle:read("*a")
     handle:close()
-    return result:gsub("\n", "")
+    return result:match("^%s*(.-)%s*$")
 end
 
 function conky_core1_temp()
     local handle = io.popen("sensors | grep 'Core 1' | awk '{print $3}'")
     local result = handle:read("*a")
     handle:close()
-    return result:gsub("\n", "")
+    return result:match("^%s*(.-)%s*$")
 end
 
 function conky_cpu_temp()
     local handle = io.popen("sensors | grep '^CPU:' | awk '{print $2}'")
     local result = handle:read("*a")
     handle:close()
-    return result:gsub("\n", "")
+    return result:match("^%s*(.-)%s*$")
 end
 
 function conky_cpu_bar_color(cpu_name)
