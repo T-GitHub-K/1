@@ -1,0 +1,87 @@
+
+-- /etc/conky/cpu_uty.lua
+
+function conky_cpu_fan()
+    local handle = io.popen("sensors | grep 'Processor Fan' | awk '{print $3}'")
+    local result = handle:read("*a")
+    handle:close()
+    return result:match("^%s*(.-)%s*$")
+end
+
+function conky_pkg_temp()
+    local handle = io.popen("sensors | grep 'Package id 0' | awk '{print $4}'")
+    local result = handle:read("*a")
+    handle:close()
+    return result:match("^%s*(.-)%s*$")
+end
+
+function conky_core0_temp()
+    local handle = io.popen("sensors | grep 'Core 0' | awk '{print $3}'")
+    local result = handle:read("*a")
+    handle:close()
+    return result:match("^%s*(.-)%s*$")
+end
+
+function conky_core1_temp()
+    local handle = io.popen("sensors | grep 'Core 1' | awk '{print $3}'")
+    local result = handle:read("*a")
+    handle:close()
+    return result:match("^%s*(.-)%s*$")
+end
+
+function conky_cpu_temp()
+    local handle = io.popen("sensors | grep '^CPU:' | awk '{print $2}'")
+    local result = handle:read("*a")
+    handle:close()
+    return result:match("^%s*(.-)%s*$")
+end
+
+function conky_cpu_bar_color(cpu_name)
+    local cpu = tonumber(conky_parse("${cpu " .. cpu_name .. "}")) or 0
+
+    if cpu <= 10 then
+        return "${color aaaaaa}"   -- 灰
+    elseif cpu <= 50 then
+        return "${color 90ee90}"   -- 緑
+    elseif cpu <= 80 then
+        return "${color ffa500}"   -- 黄色
+    else
+        return "${color ff0000}"   -- 赤
+    end
+end
+
+function conky_cpu_fan_color()
+    local handle = io.popen("sensors | grep 'Processor Fan' | awk '{print $3}'")
+
+    if not handle then
+        return "${color 444444}"
+    end
+
+    local result = handle:read("*a")
+    handle:close()
+
+    local fan = tonumber(result:match("^%s*(.-)%s*$")) or 0
+
+    if fan <= 0 then
+        return "${color 444444}"   -- 灰
+    elseif fan <= 3000 then
+        return "${color aaaaaa}"   -- 灰色
+    elseif fan <= 8000 then
+        return "${color ffa500}"   -- 黄色
+    else
+        return "${color ff0000}"   -- 赤
+    end
+end
+
+function conky_mem_color()
+    local mem = tonumber(conky_parse('${memperc}')) or 0
+
+    if mem < 50 then
+        return "${color aaaaaa}"   -- 灰
+    elseif mem < 90 then
+        return "${color ffa500}"   -- 黄色
+    else
+        return "${color ff0000}"   -- 赤
+    end
+end
+
