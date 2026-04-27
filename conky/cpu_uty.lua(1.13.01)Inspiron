@@ -40,7 +40,7 @@ function conky_cpu_bar_color(cpu_name)
     local cpu = tonumber(conky_parse("${cpu " .. cpu_name .. "}")) or 0
 
     if cpu <= 10 then
-        return "${color aaaaaa}"   -- 灰
+        return "${color 444444}"   -- 灰
     elseif cpu <= 50 then
         return "${color 90ee90}"   -- 緑
     elseif cpu <= 80 then
@@ -77,7 +77,7 @@ function conky_mem_color()
     local mem = tonumber(conky_parse('${memperc}')) or 0
 
     if mem < 50 then
-        return "${color aaaaaa}"   -- 灰
+        return "${color 444444}"   -- 灰
     elseif mem < 90 then
         return "${color ffa500}"   -- 黄色
     else
