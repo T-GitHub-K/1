@@ -1,0 +1,145 @@
+-- /etc/conky/cpu_uty.lua（軽量化＋ネットワーク自動対応）
+
+-----------------------------
+-- sensorsキャッシュ
+-----------------------------
+local sensors_cache = ""
+local last_update = 0
+
+local function get_sensors()
+    local now = os.time()
+
+    if now - last_update > 2 then
+        local handle = io.popen("sensors")
+        if handle then
+            sensors_cache = handle:read("*a")
+            handle:close()
+            last_update = now
+        end
+    end
+
+    return sensors_cache
+end
+
+-----------------------------
+-- CPU / 温度 / FAN
+-----------------------------
+function conky_val(name)
+    local s = get_sensors()
+
+    local map = {
+        fan  = "Processor Fan:%s+([%d]+)",
+        pkg  = "Package id 0:%s+%+([%d%.]+°C)",
+        c0   = "Core 0:%s+%+([%d%.]+°C)",
+        c1   = "Core 1:%s+%+([%d%.]+°C)",
+        cpu  = "CPU:%s+%+([%d%.]+°C)"
+    }
+
+    local v = s:match(map[name] or "") or "N/A"
+    return v:gsub("\n","")
+end
+
+-----------------------------
+-- CPU使用率カラー（統合）
+-----------------------------
+function conky_color_cpu(cpu_name)
+    local cpu = tonumber(conky_parse("${cpu " .. cpu_name .. "}")) or 0
+
+    if cpu <= 10 then
+        return "${color 444444}"
+    elseif cpu <= 50 then
+        return "${color 90ee90}"
+    elseif cpu <= 80 then
+        return "${color ffa500}"
+    else
+        return "${color ff0000}"
+    end
+end
+
+-----------------------------
+-- FANカラー（統合）
+-----------------------------
+function conky_color_fan()
+    local s = get_sensors()
+    local fan = tonumber(s:match("Processor Fan:%s+(%d+)")) or 0
+
+    if fan <= 0 then
+        return "${color 444444}"
+    elseif fan <= 3000 then
+        return "${color aaaaaa}"
+    elseif fan <= 8000 then
+        return "${color ffa500}"
+    else
+        return "${color ff0000}"
+    end
+end
+
+-----------------------------
+-- MEMカラー
+-----------------------------
+function conky_color_mem()
+    local mem = tonumber(conky_parse("${memperc}")) or 0
+
+    if mem < 50 then
+        return "${color 444444}"
+    elseif mem < 90 then
+        return "${color ffa500}"
+    else
+        return "${color ff0000}"
+    end
+end
+
+-----------------------------
+-- ネットワーク自動判定
+-----------------------------
+local net_iface = nil
+
+local function detect_iface()
+    local handle = io.popen("ip route | grep default")
+    if handle then
+        local result = handle:read("*a")
+        handle:close()
+
+        local iface = result:match("dev%s+(%S+)")
+        if iface then
+            return iface
+        end
+    end
+    return "eth0" -- fallback
+end
+
+function conky_iface()
+    if not net_iface then
+        net_iface = detect_iface()
+    end
+    return net_iface
+end
+
+-----------------------------
+-- ネットワーク表示統合
+-----------------------------
+function conky_net(field)
+    local iface = conky_iface()
+
+    local map = {
+        up   = "${upspeed " .. iface .. "}",
+        down = "${downspeed " .. iface .. "}",
+        totalup = "${totalup " .. iface .. "}",
+        totaldown = "${totaldown " .. iface .. "}",
+        ip   = "${addr " .. iface .. "}",
+        ssid = "${wireless_essid " .. iface .. "}"
+    }
+
+    return conky_parse(map[field] or "")
+end
+
+-----------------------------
+-- 改行
+-----------------------------
+function conky_newlines(n)
+    local s = ""
+    for i = 1, tonumber(n) do
+        s = s .. "\n"
+    end
+    return s
+end
