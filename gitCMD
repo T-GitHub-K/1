@@ -114,3 +114,19 @@ Are you sure you want to continue connecting (yes/no)?
 Hi username! You've successfully authenticated, but GitHub does not
 provide shell access.
 
+;SSH認証がうまく行かなかった場合
+SSH接続テスト
+ssh -T git@github.com
+
+成功例：
+Hi t-github-k! You've successfully authenticated...
+
+③ remote を SSH に戻す
+SSH鍵があるなら：
+git remote set-url origin git@github.com:t-github-k/3.git
+
+確認：
+git remote -v
+
+期待：
+origin  git@github.com:t-github-k/3.git
