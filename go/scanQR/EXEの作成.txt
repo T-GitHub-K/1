@@ -1,0 +1,71 @@
+④ syso生成
+
+プロジェクトフォルダで：
+
+goversioninfo -icon=scanQR.ico
+
+または：
+
+goversioninfo -config=versioninfo.json
+
+すると生成されます。
+
+resource.syso
+⑤ 普通にビルド
+go build -ldflags="-s -w" -o scanQR.exe
+
+これだけ。
+
+Go が自動で resource.syso をリンクします。
+
+生成後：
+
+scanQR.exe
+右クリック
+→ プロパティ
+→ 詳細
+
+ここに、
+
+ファイルの説明
+製品名
+バージョン
+会社名
+アイコン
+
+が入ります。
+
+さらにサイズを少し削るなら：
+
+go build ^
+-ldflags="-s -w -H windowsgui" ^
+-o scanQR.exe
+
+-H windowsgui
+→ コンソール画面を出さない（GUIアプリ向け）
+
+ただし今の scanQR は fmt.Println() を使っているので、付けるとログが見えなくなります。
+
+前に作っていた scanQR なら、完成形はこんな構成が扱いやすいです。
+
+scanQR/
+ ├─ scanQR.go
+ ├─ scanQR.ico
+ ├─ versioninfo.json
+ ├─ resource.syso
+ ├─ scanQR.ini
+ └─ build.bat
+
+build.bat
+
+@echo off
+
+goversioninfo -config=versioninfo.json
+
+go build -ldflags="-s -w" -o scanQR.exe
+
+pause
+
+これで毎回ワンクリックでアイコン付き EXE が作れます。
+
+

@@ -1,0 +1,26 @@
+{
+  "FixedFileInfo": {
+    "FileVersion": {
+      "Major": 1,
+      "Minor": 0,
+      "Patch": 0,
+      "Build": 0
+    },
+    "ProductVersion": {
+      "Major": 1,
+      "Minor": 0,
+      "Patch": 0,
+      "Build": 0
+    }
+  },
+  "StringFileInfo": {
+    "CompanyName": "System Origin",
+    "FileDescription": "scanQR PDF Monitor",
+    "FileVersion": "1.0.0",
+    "InternalName": "scanQR",
+    "OriginalFilename": "scanQR.exe",
+    "ProductName": "scanQR",
+    "ProductVersion": "1.0.0"
+  },
+  "IconPath": "scanQR.ico"
+}
