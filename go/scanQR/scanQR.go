@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"image"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -9,6 +10,9 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gen2brain/go-fitz"
+	"github.com/makiuchi-d/gozxing"
+	"github.com/makiuchi-d/gozxing/qrcode"
 	"gopkg.in/ini.v1"
 )
 
@@ -25,56 +29,43 @@ var (
 )
 
 func loadConfig() {
-
 	watchFolder = DefaultFolder
 	exitDelay = DefaultDelay
 
 	exe, err := os.Executable()
-
-	if err == nil {
-
-		iniFile :=
-			filepath.Join(
-				filepath.Dir(exe),
-				"scanQR.ini",
-			)
-
-		if _, err := os.Stat(iniFile); err == nil {
-
-			cfg, err := ini.Load(iniFile)
-
-			if err == nil {
-
-				watchFolder =
-					cfg.Section("SCAN").
-						Key("watch_folder").
-						MustString(DefaultFolder)
-
-				exitDelay =
-					cfg.Section("SCAN").
-						Key("exit_delay").
-						MustFloat64(DefaultDelay)
-
-			}
-
-		}
-
+	if err != nil {
+		return
 	}
+
+	iniPath :=
+		filepath.Join(
+			filepath.Dir(exe),
+			"scanQR.ini",
+		)
+
+	cfg, err := ini.Load(iniPath)
+	if err != nil {
+		return
+	}
+
+	watchFolder =
+		cfg.Section("SCAN").
+			Key("watch_folder").
+			MustString(DefaultFolder)
+
+	exitDelay =
+		cfg.Section("SCAN").
+			Key("exit_delay").
+			MustFloat64(DefaultDelay)
 
 	if len(os.Args) > 1 {
 		watchFolder = os.Args[1]
 	}
-
 }
 
 func stopExisting() {
 
-	if _, err := os.Stat(pidFile); err != nil {
-		return
-	}
-
 	b, err := os.ReadFile(pidFile)
-
 	if err != nil {
 		return
 	}
@@ -89,9 +80,7 @@ func stopExisting() {
 	}
 
 	p, err :=
-		os.FindProcess(
-			pid,
-		)
+		os.FindProcess(pid)
 
 	if err == nil && p != nil {
 
@@ -101,18 +90,17 @@ func stopExisting() {
 			)
 
 		time.Sleep(
-			2 * time.Second,
+			time.Second,
 		)
 
 	}
-
 }
 
 func parseQR(
 	text string,
 ) map[string]string {
 
-	result :=
+	r :=
 		map[string]string{}
 
 	for _, line := range strings.Split(
@@ -120,19 +108,16 @@ func parseQR(
 		"\n",
 	) {
 
-		if strings.Contains(
-			line,
-			"=",
-		) {
+		x :=
+			strings.SplitN(
+				line,
+				"=",
+				2,
+			)
 
-			x :=
-				strings.SplitN(
-					line,
-					"=",
-					2,
-				)
+		if len(x) == 2 {
 
-			result[strings.ToLower(
+			r[strings.ToLower(
 				strings.TrimSpace(
 					x[0],
 				),
@@ -142,63 +127,34 @@ func parseQR(
 				)
 
 		}
-
 	}
 
-	return result
-
+	return r
 }
 
 func moveFile(
 	src,
 	folder,
-	filename string,
-) {
+	name string,
+) error {
 
-	_ =
+	err :=
 		os.MkdirAll(
 			folder,
 			0755,
 		)
 
+	if err != nil {
+		return err
+	}
+
 	dst :=
 		filepath.Join(
 			folder,
-			filename,
+			name,
 		)
 
-	base :=
-		dst
-
-	ext :=
-		filepath.Ext(
-			dst,
-		)
-
-	n := 1
-
-	for {
-
-		if _, err := os.Stat(dst); err != nil {
-			break
-		}
-
-		dst =
-			fmt.Sprintf(
-				"%s_%d%s",
-				strings.TrimSuffix(
-					base,
-					ext,
-				),
-				n,
-				ext,
-			)
-
-		n++
-
-	}
-
-	err :=
+	err =
 		os.Rename(
 			src,
 			dst,
@@ -213,6 +169,41 @@ func moveFile(
 
 	}
 
+	return err
+}
+
+func decodeQR(
+	img image.Image,
+) (
+	string,
+	error,
+) {
+
+	bmp, err :=
+		gozxing.
+			NewBinaryBitmapFromImage(
+				img,
+			)
+
+	if err != nil {
+		return "", err
+	}
+
+	reader :=
+		qrcode.
+			NewQRCodeReader()
+
+	res, err :=
+		reader.Decode(
+			bmp,
+			nil,
+		)
+
+	if err != nil {
+		return "", err
+	}
+
+	return res.GetText(), nil
 }
 
 func readQR(
@@ -222,8 +213,45 @@ func readQR(
 	error,
 ) {
 
-	return "", nil
+	doc, err :=
+		fitz.New(
+			pdf,
+		)
 
+	if err != nil {
+		return "", err
+	}
+
+	defer doc.Close()
+
+	for i := 0; i < doc.NumPage(); i++ {
+
+		img, err :=
+			doc.Image(
+				i,
+			)
+
+		if err != nil {
+			continue
+		}
+
+		text, err :=
+			decodeQR(
+				img,
+			)
+
+		if err == nil {
+
+			fmt.Println(
+				"QR読取:",
+				filepath.Base(pdf),
+			)
+
+			return text, nil
+		}
+	}
+
+	return "", fmt.Errorf("QR not found")
 }
 
 func monitor() {
@@ -248,10 +276,7 @@ func monitor() {
 		if len(files) == 0 {
 
 			if empty.IsZero() {
-
-				empty =
-					time.Now()
-
+				empty = time.Now()
 			}
 
 			if time.
@@ -261,17 +286,13 @@ func monitor() {
 				Seconds() >=
 				exitDelay {
 
-				os.Exit(
-					0,
-				)
-
+				return
 			}
 
 		} else {
 
 			empty =
 				time.Time{}
-
 		}
 
 		for _, f := range files {
@@ -294,17 +315,25 @@ func monitor() {
 					qr,
 				)
 
-			if info["folder"] != "" &&
-				info["filename"] != "" {
+			folder :=
+				info["folder"]
 
-				moveFile(
-					f,
-					info["folder"],
-					info["filename"],
-				)
+			name :=
+				info["filename"]
 
-				processed[f] =
-					true
+			if folder != "" &&
+				name != "" {
+
+				err :=
+					moveFile(
+						f,
+						folder,
+						name,
+					)
+
+				if err == nil {
+					processed[f] = true
+				}
 
 			}
 
@@ -316,7 +345,6 @@ func monitor() {
 		)
 
 	}
-
 }
 
 func main() {
@@ -348,6 +376,7 @@ func main() {
 			0644,
 		)
 
-	monitor()
+	defer os.Remove(pidFile)
 
+	monitor()
 }
