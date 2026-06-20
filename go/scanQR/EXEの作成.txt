@@ -69,3 +69,4 @@ pause
 これで毎回ワンクリックでアイコン付き EXE が作れます。
 
 
+$env:GOOS="windows"; $env:GOARCH="amd64"; go build -o scanQR.exe
