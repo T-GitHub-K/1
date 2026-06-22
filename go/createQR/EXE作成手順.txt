@@ -1,0 +1,23 @@
+
+createQR\versioninfo.jsonを作成
+
+その後下記のコマンドを実行
+goversioninfo -64 versioninfo.json
+
+成功すると
+resource.syso
+ができる。
+
+go build -o CreateQR.exe
+
+
+
+
+
+icon
+BMPファイルをicoファイルに変換
+toolDL
+winget install ImageMagick.ImageMagick
+
+変換
+magick createQR.bmp -define icon:auto-resize=256,128,64,48,32,16 createQR.ico
