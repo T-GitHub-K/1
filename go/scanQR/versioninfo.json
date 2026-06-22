@@ -1,26 +1,41 @@
 {
   "FixedFileInfo": {
     "FileVersion": {
-      "Major": 1,
-      "Minor": 0,
+      "Major": 0,
+      "Minor": 9,
       "Patch": 0,
       "Build": 0
     },
     "ProductVersion": {
-      "Major": 1,
-      "Minor": 0,
+      "Major": 0,
+      "Minor": 9,
       "Patch": 0,
       "Build": 0
+    },
+    "FileFlagsMask": "3f",
+    "FileFlags": "00",
+    "FileOS": "040004",
+    "FileType": "01",
+    "FileSubType": "00"
+  },
+
+  "StringFileInfo": {
+    "CompanyName": "株式会社システムオリジン",
+    "FileDescription": "scanQR - QR自動仕分けツール Go",
+    "FileVersion": "0.9.0.0",
+    "InternalName": "scanQR",
+    "LegalCopyright": "Copyright (C) 2026 System Origin Co., Ltd.",
+    "OriginalFilename": "scanQR.exe",
+    "ProductName": "scanQR Utility",
+    "ProductVersion": "0.9.0.0"
+  },
+
+  "VarFileInfo": {
+    "Translation": {
+      "LangID": "0411",
+      "CharsetID": "04B0"
     }
   },
-  "StringFileInfo": {
-    "CompanyName": "System Origin",
-    "FileDescription": "scanQR PDF Monitor",
-    "FileVersion": "1.0.0",
-    "InternalName": "scanQR",
-    "OriginalFilename": "scanQR.exe",
-    "ProductName": "scanQR",
-    "ProductVersion": "1.0.0"
-  },
+
   "IconPath": "scanQR.ico"
 }

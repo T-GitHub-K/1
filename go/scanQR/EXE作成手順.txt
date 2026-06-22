@@ -8,7 +8,7 @@ goversioninfo -64 versioninfo.json
 resource.syso
 ができる。
 
-go build -o CreateQR.exe
+go build -o scanQR.exe
 
 
 
@@ -20,10 +20,10 @@ toolDL
 winget install ImageMagick.ImageMagick
 
 変換
-magick createQR.bmp -define icon:auto-resize=256,128,64,48,32,16 createQR.ico
+magick scanQR.bmp -define icon:auto-resize=256,128,64,48,32,16 createQR.ico
 
 検査
-Format-Hex .\createQR.ico -Count 16
+Format-Hex .\scanQR.ico -Count 16
 
 判定基準：
 正常な ICO：00 00 01 00
