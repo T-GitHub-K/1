@@ -5,7 +5,7 @@
 createQR.EXE
 
 ■パラメータ
---folder 必須
+--folder 必須 2026/06/24 廃止
 --filename 必須
 -o / --output 出力先（省略時 qr.png）
 --size-mm QRサイズ指定（mm）(省略時 40mm)
@@ -18,7 +18,7 @@ QR誤り訂正 L
 
 ■コマンドライン例
 c:\createQR.exe
---folder "\\Fleet016\TAXCON\T_東京\M_ムサシ交通\監査資料\日常点検表" 
+--folder "\\Fleet016\TAXCON\T_東京\M_ムサシ交通\監査資料\日常点検表"　2026/06/24 廃止 
 --filename "日常点検表_20260616_123456_12345678_河　村　武　男.pdf" 
 -o test.png
 --auto-size
@@ -29,3 +29,4 @@ createQR.go       メインのソースコード
 
 ■変更履歴
 Ver1.0.0.0　2026/06/22　Kawamura　初版
+Ver1.1.0.0　2026/06/24　Kawamura　--folderパラメータ廃止

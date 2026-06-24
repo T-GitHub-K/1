@@ -184,12 +184,6 @@ func createQR(text, output string, sizeMM float64, footer string) error {
 
 func main() {
 
-	folder := flag.String(
-		"folder",
-		"",
-		"folder",
-	)
-
 	filename := flag.String(
 		"filename",
 		"",
@@ -222,18 +216,17 @@ func main() {
 
 	flag.Parse()
 
-	if *folder == "" || *filename == "" {
+	if *filename == "" {
 
 		fmt.Println(
-			"--folder と --filename は必須です",
+			"--filename は必須です",
 		)
 
 		os.Exit(1)
 	}
 
 	text := fmt.Sprintf(
-		"folder=%s\nfilename=%s",
-		*folder,
+		"filename=%s",
 		*filename,
 	)
 
