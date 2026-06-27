@@ -230,6 +230,15 @@ func main() {
 		*filename,
 	)
 
+	out := filepath.Clean(*output)
+
+	if info, err := os.Stat(out); err == nil && info.IsDir() {
+		out = filepath.Join(
+			out,
+			"qr.png",
+		)
+	}
+
 	size := 40.0
 
 	if *sizeMM > 0 {
@@ -243,7 +252,7 @@ func main() {
 
 	if err := createQR(
 		text,
-		filepath.Clean(*output),
+		out,
 		size,
 		*ftext,
 	); err != nil {
@@ -252,7 +261,7 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("保存完了 :", *output)
+	fmt.Println("保存完了 :", out)
 	fmt.Printf("QRサイズ : %.1f mm\n", size)
 
 	if *ftext != "" {

@@ -249,7 +249,7 @@ func main() {
 
 	if err := createQR(
 		text,
-		filepath.Clean(*output),
+		out,
 		size,
 		*ftext,
 	); err != nil {
@@ -258,7 +258,7 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("保存完了 :", *output)
+	fmt.Println("保存完了 :", out)
 	fmt.Printf("QRサイズ : %.1f mm\n", size)
 
 	if *ftext != "" {
