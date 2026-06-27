@@ -1,0 +1,1 @@
+.\gpQR.exe --qrtxt "なんでもかんでもQRコード化" -o testexe.png

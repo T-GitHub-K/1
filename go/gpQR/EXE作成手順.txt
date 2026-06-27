@@ -1,0 +1,32 @@
+
+versioninfo.jsonを作成
+
+その後下記のコマンドを実行
+goversioninfo -64 versioninfo.json
+
+成功すると
+resource.syso
+ができる。
+
+go build -o gpQR.exe
+
+
+
+
+
+icon
+BMPファイルをicoファイルに変換
+toolDL
+winget install ImageMagick.ImageMagick
+
+変換
+magick gpQR.bmp -define icon:auto-resize=256,128,64,48,32,16 gpQR.ico
+
+検査
+Format-Hex .\gpQR.ico -Count 16
+
+判定基準：
+正常な ICO：00 00 01 00
+PNGだった場合：89 50 4E 47
+JPEGだった場合：FF D8 FF
+BMP：42 4D
