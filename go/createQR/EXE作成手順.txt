@@ -10,6 +10,9 @@ resource.syso
 
 go build -o CreateQR.exe
 
+コンソールウィンドウを表示させない
+go build -ldflags="-H=windowsgui" -o CreateQR.exe
+
 
 
 
