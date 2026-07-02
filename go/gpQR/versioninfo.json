@@ -20,11 +20,11 @@
   },
 
   "StringFileInfo": {
-    "CompanyName": "株式会社システムオリジン",
+    "CompanyName": " ",
     "FileDescription": "gpQR - 汎用QRコード作成ツール G",
     "FileVersion": "1.0.0.0",
     "InternalName": "gpQR",
-    "LegalCopyright": "Copyright (C) 2026 System Origin Co., Ltd.",
+    "LegalCopyright": "Copyright (C) 2026 Takeo Kawamura",
     "OriginalFilename": "gpQR.exe",
     "ProductName": "gpQR Utility",
     "ProductVersion": "1.0.0.0"

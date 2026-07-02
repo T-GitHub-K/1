@@ -82,7 +82,7 @@ func createQR(text, output string, sizeMM float64, footer string) error {
 
 	qr, err := qrcode.New(
 		text,
-		qrcode.Low,
+		qrcode.Medium,
 	)
 	if err != nil {
 		return err
@@ -230,15 +230,6 @@ func main() {
 		*filename,
 	)
 
-	out := filepath.Clean(*output)
-
-	if info, err := os.Stat(out); err == nil && info.IsDir() {
-		out = filepath.Join(
-			out,
-			"qr.png",
-		)
-	}
-
 	size := 40.0
 
 	if *sizeMM > 0 {
@@ -252,7 +243,7 @@ func main() {
 
 	if err := createQR(
 		text,
-		out,
+		filepath.Clean(*output),
 		size,
 		*ftext,
 	); err != nil {
@@ -261,7 +252,7 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("保存完了 :", out)
+	fmt.Println("保存完了 :", *output)
 	fmt.Printf("QRサイズ : %.1f mm\n", size)
 
 	if *ftext != "" {

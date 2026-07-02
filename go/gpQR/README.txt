@@ -14,6 +14,11 @@ gpQR.EXE
 QR誤り訂正 L
 300dpi保存
 余白付き
+--level L (L,M,Q,H) デフォルトL
+--textfile <ファイル名> に対応
+  --textfile 指定時は --qrtxt より優先
+    UTF-8 BOM を自動除去
+    Windows (CRLF) と Linux (LF) の改行を統一
 
 ■コマンドライン例
 c:\gpQR.exe
@@ -21,6 +26,8 @@ c:\gpQR.exe
 -o c:\scanqr\test.png
 --auto-size
 --ftext "日常 A-10001"
+--level L
+--textfile <ファイル名>
 
 ■その他
 gpQR.go       メインのソースコード
