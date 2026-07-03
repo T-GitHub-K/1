@@ -1,1 +1,3 @@
 .\gpQR.exe --qrtxt "なんでもかんでもQRコード化" -o testexe.png
+
+go run gpQR.go --qrtxt "テスト実行" --margin 10
