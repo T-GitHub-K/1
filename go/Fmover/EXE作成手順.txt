@@ -1,0 +1,40 @@
+■環境
+go mod init Fmover-tool
+go.modが生成される。
+
+
+■バージョン
+versioninfo.jsonを作成
+
+その後下記のコマンドを実行
+go install github.com/josephspurrier/goversioninfo/cmd/goversioninfo@latest
+
+goversioninfo -64 versioninfo.json
+
+成功すると
+resource.syso
+ができる。
+
+■ビルド
+go build -o Fmover.exe
+
+プロンプト画面出さない
+go build -ldflags="-H=windowsgui" -o Fmover.exe
+
+■アイコン
+icon
+BMPファイルをicoファイルに変換
+toolDL
+winget install ImageMagick.ImageMagick
+
+変換
+magick Fmover.png -define icon:auto-resize=256,128,64,48,32,16 Fmover.ico
+
+検査
+Format-Hex .\Fmover.ico -Count 16
+
+判定基準：
+正常な ICO：00 00 01 00
+PNGだった場合：89 50 4E 47
+JPEGだった場合：FF D8 FF
+BMP：42 4D
