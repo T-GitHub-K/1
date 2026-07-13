@@ -11,40 +11,45 @@ import (
 	"time"
 )
 
-// デフォルト設定値（INIファイルがない、または項目がない場合に適用）
+// デフォルト設定値
 var (
 	source     = "C:\\DATA"
 	backup     = "C:\\BACKUP"
-	days       = 30
+	days       = 365
 	recursive  = true
 	keepFolder = true
-	dryRun     = true
+	dryRun     = false
 	enableLog  = true
 	logFile    = "backup_history.log"
 )
 
 const iniFileName = "config.ini"
 
-// INIファイルを読み込んで設定を上書きする関数
-func loadConfig() {
-	file, err := os.Open(iniFileName)
+func loadConfig(iniPath string) {
+	file, err := os.Open(iniPath)
 	if err != nil {
-		// ファイルがない場合はデフォルト値のまま進行
-		fmt.Printf("設定ファイル (%s) が見つからないため、デフォルト値で実行します。\n", iniFileName)
 		return
 	}
 	defer file.Close()
 
-	fmt.Printf("設定ファイル (%s) を読み込みました。\n", iniFileName)
 	scanner := bufio.NewScanner(file)
+	isFirstLine := true
+
 	for scanner.Scan() {
-		line := strings.TrimSpace(scanner.Text())
-		// 空行やコメント行（;, #）はスキップ
-		if line == "" || strings.HasPrefix(line, ";") || strings.HasPrefix(line, "#") || strings.HasPrefix(line, "[") {
+		line := scanner.Text()
+		if isFirstLine {
+			line = strings.TrimPrefix(line, "\xef\xbb\xbf")
+			isFirstLine = false
+		}
+		line = strings.TrimSpace(line)
+
+		if line == "" || strings.HasPrefix(line, ";") || strings.HasPrefix(line, "#") {
+			continue
+		}
+		if strings.HasPrefix(line, "[") || strings.HasSuffix(line, "]") {
 			continue
 		}
 
-		// key=value の分割
 		parts := strings.SplitN(line, "=", 2)
 		if len(parts) != 2 {
 			continue
@@ -52,8 +57,6 @@ func loadConfig() {
 
 		key := strings.TrimSpace(parts[0])
 		val := strings.TrimSpace(parts[1])
-
-		// 各設定項目のマッピング（文字列のクォーテーションを除去）
 		val = strings.Trim(val, `"'`)
 
 		switch key {
@@ -85,35 +88,67 @@ func loadConfig() {
 			logFile = val
 		}
 	}
-	// ★ ここに追加：スキャン中のエラーをチェック
+
 	if err := scanner.Err(); err != nil {
-		fmt.Fprintf(os.Stderr, "設定ファイルの読み込み中にエラーが発生しました: %v\n", err)
+		fmt.Fprintf(os.Stderr, "config.ini の読み込み中にエラーが発生しました: %v\n", err)
 	}
 }
 
 func main() {
-	// 設定の読み込み
-	loadConfig()
+	exePath, err := os.Executable()
+	if err != nil {
+		return
+	}
+	exeDir := filepath.Dir(exePath)
+	iniPath := filepath.Join(exeDir, iniFileName)
 
-	// 出力先（標準出力 or 標準出力+ファイル）を制御するWriter
-	var output io.Writer = os.Stdout
+	// ★ 修正①: EXEの横に config.ini が無い場合（go run の時など）
+	if _, err := os.Stat(iniPath); os.IsNotExist(err) {
+		// カレントディレクトリ（今コマンドを開いているフォルダ）の config.ini を見に行く
+		iniPath = iniFileName
+
+		// かつ、go run の時は実行フォルダ(exeDir)自体もカレントディレクトリに補正する
+		// これによりログファイルが作業フォルダ内に作成されるようになります
+		exeDir, _ = os.Getwd()
+	}
+
+	loadConfig(iniPath)
+
+	source = filepath.Clean(source)
+	backup = filepath.Clean(backup)
+
+	if !filepath.IsAbs(logFile) {
+		logFile = filepath.Join(exeDir, logFile)
+	}
+
+	var output io.Writer = io.Discard
 
 	if enableLog {
 		f, err := os.OpenFile(logFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "ログファイルの開く処理に失敗しました: %v\n", err)
 			return
 		}
-		defer f.Close()
-		output = io.MultiWriter(os.Stdout, f)
+		defer func() {
+			_ = f.Sync()
+			f.Close()
+		}()
+		output = f
 	}
+
+	fmt.Fprintln(output, "==================================================")
+	fmt.Fprintf(output, "[%s] バックアップ処理を開始します。\n", time.Now().Format("2006-01-02 15:04:05"))
+	fmt.Fprintln(output, "--------------------------------------------------")
+	fmt.Fprintf(output, "ソースフォルダ: %s\n", source)
+	fmt.Fprintf(output, "バックアップ先: %s\n", backup)
+	fmt.Fprintf(output, "対象日数: %d 日以前\n", days)
+	fmt.Fprintf(output, "ドライラン(テストモード): %v\n", dryRun)
+	fmt.Fprintln(output, "----------------------------------")
 
 	limit := time.Now().AddDate(0, 0, -days)
 
-	fmt.Fprintf(output, "[%s] バックアップ処理を開始します。制限日付: %s\n", time.Now().Format("2006-01-02 15:04:05"), limit.Format("2006-01-02"))
-
-	filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
+	_ = filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
+			fmt.Fprintf(output, "[WARNING] パスアクセスエラー (%s): %v\n", path, err)
 			return nil
 		}
 		if info.IsDir() {
@@ -139,14 +174,18 @@ func main() {
 				if err := copyFile(path, dst); err == nil {
 					_ = os.Remove(path)
 				} else {
-					fmt.Fprintf(output, "ERROR: ファイルの移動に失敗しました (%s): %v\n", path, err)
+					fmt.Fprintf(output, "ERROR: 移動失敗 (%s): %v\n", path, err)
 				}
 			}
 		}
 		return nil
 	})
 
+	fmt.Fprintln(output, "--------------------------------------------------")
 	fmt.Fprintf(output, "[%s] バックアップ処理が完了しました。\n", time.Now().Format("2006-01-02 15:04:05"))
+	// ★ 修正点: 警告の原因となっていた末尾の \n を削除し、次回の開始時との間に空行を作るため、別で改行を出力
+	fmt.Fprintln(output, "==================================================")
+	fmt.Fprintln(output)
 }
 
 func copyFile(src, dst string) error {

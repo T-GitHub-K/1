@@ -35,3 +35,4 @@ logFile    = "backup_history.log"
 
 ■変更履歴
 Ver1.0.0.0　2026/07/07　Kawamura　初版
+Ver1.0.0.1　2026/07/13　Kawamura　Log出力、Go Run 環境整備

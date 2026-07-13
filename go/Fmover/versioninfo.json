@@ -4,13 +4,13 @@
       "Major": 1,
       "Minor": 0,
       "Patch": 0,
-      "Build": 0
+      "Build": 1
     },
     "ProductVersion": {
       "Major": 1,
       "Minor": 0,
       "Patch": 0,
-      "Build": 0
+      "Build": 1
     },
     "FileFlagsMask": "3f",
     "FileFlags": "00",
@@ -22,12 +22,12 @@
   "StringFileInfo": {
     "CompanyName": "株式会社システムオリジン",
     "FileDescription": "Fmover - ファイル移動ツール G",
-    "FileVersion": "1.0.0.0",
+    "FileVersion": "1.0.0.1",
     "InternalName": "Fmover",
     "LegalCopyright": "Copyright (C) 2026 System Origin Co., Ltd.",
     "OriginalFilename": "Fmover.exe",
     "ProductName": "Fmover",
-    "ProductVersion": "1.0.0.0"
+    "ProductVersion": "1.0.0.1"
   },
 
   "VarFileInfo": {
